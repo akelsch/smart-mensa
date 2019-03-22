@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+    <ui:composition template="template/template.xhtml">
+        <ui:define name="title">Gerichte erstellen und ändern</ui:define>
+        <ui:define name="main">
+            <h1>Gerichte erstellen und ändern</h1>
+            <h:form>
+                <h:panelGrid id="grid" columns="3" cellpadding="5">
+                    <p:outputLabel for="name" value="Name: "/>
+                    <p:inputText id="name" value="#{dishView.name}" required="true"
+                                 requiredMessage="Bitte einen Namen für das Gericht eingeben"/>
+                    <p:message for="name"/>
+
+                    <p:outputLabel for="price" value="Preis: "/>
+                    <p:inputText id="price" value="#{dishView.price}" required="true"
+                                 requiredMessage="Bitte einen Preis für das Gericht eingeben"
+                                 validatorMessage="Der Preis muss zwischen 0,5€ und 5,50€ liegen">
+                            <f:validateDoubleRange minimum="0.5" maximum="5.5"/>
+                    </p:inputText>
+                    <p:message for="price"/>
+
+                    <p:outputLabel for="category" value="Kategorie: "/>
+                    <p:selectOneListbox id="category" value="#{dishView.category}" required="true"
+                                        requiredMessage="Bitte wähle eine Kategorie aus">
+                        <f:selectItem itemLabel="Suppe" itemValue="SOUP"/>
+                        <f:selectItem itemLabel="Nachtisch" itemValue="DESSERT"/>
+                        <f:selectItem itemLabel="Obst" itemValue="FRUIT"/>
+                        <f:selectItem itemLabel="Salat" itemValue="SALAD"/>
+                        <f:selectItem itemLabel="Hauptgericht" itemValue="MAIN_DISH"/>
+                    </p:selectOneListbox>
+                    <p:message for="category"/>
+                </h:panelGrid>
+
+                <p:commandButton value="Speichern" action="#{dishView.saveDish}" update="grid"/>
+                <p:button value="Abbrechen" outcome="manage_dishes"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
