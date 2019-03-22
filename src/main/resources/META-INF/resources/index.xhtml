@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:body>
+    <ui:composition template="template/template.xhtml">
+        <ui:define name="title">Startseite</ui:define>
+        <ui:define name="main">
+            <h1>SmartMensa Login</h1>
+            <h:form>
+                <f:event listener="#{loginView.clearForm}" type="preRenderView"/>
+
+                <h:outputLabel for="username">Benutzername</h:outputLabel><br/>
+                <h:inputText id="username" value="#{loginView.username}" required="true"
+                             requiredMessage="Bitte einen Benutzernamen eingeben"/>
+                <h:message for="username"/><br/>
+
+                <h:outputLabel for="password">Passwort</h:outputLabel><br/>
+                <h:inputText id="password" value="#{loginView.password}" required="true"
+                             requiredMessage="Bitte ein Passwort eingeben"/>
+                <h:message for="password"/><br/>
+
+                <h:commandButton value="Anmelden" action="#{loginView.login}"/>
+            </h:form>
+            <h:messages globalOnly="true" showDetail="true"/>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

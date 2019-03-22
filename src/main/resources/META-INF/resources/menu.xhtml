@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:body>
+    <ui:composition template="template/template.xhtml">
+        <ui:define name="title">Hauptmenü</ui:define>
+        <ui:define name="main">
+            <h1>Hauptmenü</h1>
+            <h:outputText value="Hallo, #{loginView.user.username}!"/><br/>
+            <c:if test="#{loginView.user.role == 'ADMIN'}">
+                <h:link value="Zur Verwaltung der Gerichte" outcome="manage_dishes"/><br/>
+                <h:link value="Zur Benutzerverwaltung" outcome="manage_users"/><br/>
+            </c:if>
+            <h:link value="Eigenes Profil ändern"/><br/>
+            <h:link value="Zur Bestellung"/><br/>
+            <h:link value="Ausloggen" outcome="index"/>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
