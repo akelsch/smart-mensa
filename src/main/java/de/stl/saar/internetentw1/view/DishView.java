@@ -35,7 +35,7 @@ public class DishView implements Serializable {
     }
 
     public String saveDish() {
-        dishRepository.save(new Dish(name,price,Category.valueOf(category),""));
+        dishRepository.save(new Dish(name, price, Category.valueOf(category), ""));
         return "manage_dishes";
     }
 }

@@ -33,4 +33,9 @@ public class ManageDishesView implements Serializable {
     public void init() {
         dishes = dishRepository.findAll();
     }
+
+    public void deleteSelectedDish() {
+        dishRepository.delete(selectedDish);
+        dishes = dishRepository.findAll();
+    }
 }
