@@ -7,9 +7,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.Optional;
 
 @ManagedBean
 @ViewScoped
@@ -32,6 +35,17 @@ public class DishView implements Serializable {
     @Inject
     public DishView(DishRepository dishRepository) {
         this.dishRepository = dishRepository;
+    }
+
+    @PostConstruct
+    public void init() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        name = facesContext.getExternalContext().getRequestParameterMap().get("dishName");
+        Optional<Dish> optionalDish = dishRepository.findByName(name);
+        optionalDish.ifPresent(dish -> {
+            price = dish.getPrice();
+            category = dish.getCategory().getValue();
+        });
     }
 
     public String saveDish() {

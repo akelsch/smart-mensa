@@ -24,11 +24,13 @@
                     <p:column headerText="Kategorie">
                         <h:outputText value="#{dish.category.value}"/>
                     </p:column>
-                    <f:facet name="footer">
+                    <p:column>
                         <!-- TODO -->
-                        <p:commandButton value="Ändern" action="create_dish"/>
+                        <p:commandButton value="Ändern" action="create_dish">
+                                <f:param name="dishName" value="#{dish.name}"/>
+                        </p:commandButton>
                         <p:commandButton value="Löschen" action="#{manageDishesView.deleteSelectedDish}" update="dataTable"/>
-                    </f:facet>
+                    </p:column>
                 </p:dataTable>
                 <!-- TODO -->
                 <p:button value="Neu" outcome="create_dish"/>
