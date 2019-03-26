@@ -32,7 +32,7 @@ public class DishView implements Serializable {
 
     private final DishRepository dishRepository;
 
-    private int id;
+    private long id;
 
     @Inject
     public DishView(DishRepository dishRepository) {

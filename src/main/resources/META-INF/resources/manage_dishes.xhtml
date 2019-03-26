@@ -11,7 +11,7 @@
             <h1>Gerichte verwalten</h1>
             <h:form>
                 <p:dataTable id="dataTable" var="dish" value="#{manageDishesView.dishes}" selectionMode="single"
-                             selection="#{manageDishesView.selectedDish}" rowKey="#{dish.id}" style="max-width: 50%;">
+                             rowKey="#{dish.id}" style="max-width: 50%;">
                     <p:column headerText="Nummer">
                         <h:outputText value="#{dish.id}"/>
                     </p:column>
@@ -27,9 +27,12 @@
                     <p:column>
                         <!-- TODO -->
                         <p:commandButton value="Ändern" action="create_dish">
-                                <f:param name="dishName" value="#{dish.name}"/>
+                            <f:param name="dishName" value="#{dish.name}"/>
                         </p:commandButton>
-                        <p:commandButton value="Löschen" action="#{manageDishesView.deleteSelectedDish}" update="dataTable"/>
+                        <p:commandButton value="Löschen" action="#{manageDishesView.deleteSelectedDish}"
+                                         update="dataTable">
+                            <f:param name="dishId" value="#{dish.id}"/>
+                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
                 <!-- TODO -->
