@@ -32,6 +32,8 @@ public class DishView implements Serializable {
 
     private final DishRepository dishRepository;
 
+    private int id;
+
     @Inject
     public DishView(DishRepository dishRepository) {
         this.dishRepository = dishRepository;
@@ -45,11 +47,14 @@ public class DishView implements Serializable {
         optionalDish.ifPresent(dish -> {
             price = dish.getPrice();
             category = dish.getCategory().getValue();
+            id = dish.getId();
         });
     }
 
     public String saveDish() {
-        dishRepository.save(new Dish(name, price, Category.valueOf(category), ""));
+        Dish dish = new Dish(name, price, Category.valueOf(category), "");
+        dish.setId(id);
+        dishRepository.save(dish);
         return "manage_dishes";
     }
 }
