@@ -46,7 +46,7 @@ public class DishView implements Serializable {
         Optional<Dish> optionalDish = dishRepository.findByName(name);
         optionalDish.ifPresent(dish -> {
             price = dish.getPrice();
-            category = dish.getCategory().getValue();
+            category = dish.getCategory().name();
             id = dish.getId();
         });
     }
