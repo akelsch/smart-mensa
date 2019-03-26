@@ -3,6 +3,7 @@ package de.stl.saar.internetentw1.view;
 import de.stl.saar.internetentw1.model.Category;
 import de.stl.saar.internetentw1.model.Dish;
 import de.stl.saar.internetentw1.repository.DishRepository;
+import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,8 +42,7 @@ public class DishView implements Serializable {
 
     @PostConstruct
     public void init() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        name = facesContext.getExternalContext().getRequestParameterMap().get("dishName");
+        name = FacesContextUtils.getRequestParameterValue("dishName");
         Optional<Dish> optionalDish = dishRepository.findByName(name);
         optionalDish.ifPresent(dish -> {
             price = dish.getPrice();

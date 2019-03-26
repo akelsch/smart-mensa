@@ -2,6 +2,7 @@ package de.stl.saar.internetentw1.view;
 
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
+import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,10 +50,7 @@ public class LoginView implements Serializable {
             return "menu?faces-redirect=true";
         }
 
-        String messageText = "Authentifizierung fehlgeschlagen!";
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", messageText);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, message);
+        FacesContextUtils.addGlobalErrorMessage("Authentifizierung fehlgeschlagen!");
 
         return "index";
     }
