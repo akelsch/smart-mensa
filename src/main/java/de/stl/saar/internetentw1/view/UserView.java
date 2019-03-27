@@ -6,6 +6,7 @@ import de.stl.saar.internetentw1.repository.UserRepository;
 import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -60,5 +61,9 @@ public class UserView implements Serializable {
         user.setId(id);
         userRepository.save(user);
         return "manage_users";
+    }
+
+    public void newPassword() {
+        password = RandomStringUtils.randomAlphanumeric(10);
     }
 }

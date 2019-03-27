@@ -33,6 +33,7 @@
                     <p:inputText id="password" value="#{userView.password}" required="true"
                                  requiredMessage="Bitte ein Passwort eingeben"/>
                     <p:message for="password"/>
+                    <p:commandButton value="Neues Passwort" action="#{userView.newPassword}" update="grid"/>
                 </h:panelGrid>
 
                 <p:commandButton value="Speichern" action="#{userView.saveUser}" update="grid"/>
