@@ -16,6 +16,11 @@
                                  requiredMessage="Bitte einen Benutzername eingeben"/>
                     <p:message for="name"/>
 
+                    <p:outputLabel for="email" value="Email: "/>
+                    <p:inputText id="email" value="#{userView.email}" required="true"
+                                 requiredMessage="Bitte eine Email eingeben"/>
+                    <p:message for="email"/>
+
                     <p:outputLabel for="role" value="Rolle: "/>
                     <p:selectOneListbox id="role" value="#{userView.role}" required="true"
                                         requiredMessage="Bitte eine Rolle auswählen">

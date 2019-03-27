@@ -21,12 +21,15 @@ public class User {
 
     private String password;
 
+    private String email;
+
     @Enumerated
     private Role role;
 
-    public User(String username, String password, Role role) {
+    public User(String username, String password, String email, Role role) {
         this.username = username;
         this.password = password;
+        this.email = email;
         this.role = role;
     }
 }

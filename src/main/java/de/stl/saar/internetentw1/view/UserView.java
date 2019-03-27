@@ -28,6 +28,10 @@ public class UserView implements Serializable {
 
     @Getter
     @Setter
+    private String email;
+
+    @Getter
+    @Setter
     private String role;
 
     private final UserRepository userRepository;
@@ -45,13 +49,14 @@ public class UserView implements Serializable {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         optionalUser.ifPresent(user -> {
             password = user.getPassword();
+            email = user.getEmail();
             role = user.getRole().name();
             id = user.getId();
         });
     }
 
     public String saveUser() {
-        User user = new User(username, password, Role.valueOf(role));
+        User user = new User(username, password, email, Role.valueOf(role));
         user.setId(id);
         userRepository.save(user);
         return "manage_users";
