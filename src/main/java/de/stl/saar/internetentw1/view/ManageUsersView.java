@@ -2,6 +2,7 @@ package de.stl.saar.internetentw1.view;
 
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
+import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 
 import javax.annotation.ManagedBean;
@@ -26,6 +27,12 @@ public class ManageUsersView implements Serializable {
 
     @PostConstruct
     public void init() {
+        users = userRepository.findAll();
+    }
+
+    public void deleteSelectedUser() {
+        Long id = Long.parseLong(FacesContextUtils.getRequestParameterValue("userId"));
+        userRepository.deleteById(id);
         users = userRepository.findAll();
     }
 }
