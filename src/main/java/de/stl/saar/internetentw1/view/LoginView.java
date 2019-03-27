@@ -8,11 +8,10 @@ import lombok.Setter;
 
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.Optional;
 
 @ManagedBean
 @SessionScoped
@@ -43,10 +42,10 @@ public class LoginView implements Serializable {
     }
 
     public String login() {
-        User user = userRepository.findByUsername(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
-        if (user != null && user.getPassword().equals(password)) {
-            this.user = user;
+        if (user.isPresent() && user.get().getPassword().equals(password)) {
+            this.user = user.get();
             return "menu?faces-redirect=true";
         }
 

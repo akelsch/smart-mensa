@@ -23,7 +23,7 @@
                     </p:column>
                     <p:column>
                         <!-- TODO -->
-                        <p:commandButton value="Ändern">
+                        <p:commandButton value="Ändern" action="create_user">
                             <f:param name="userName" value="#{user.username}"/>
                         </p:commandButton>
                         <p:commandButton value="Löschen" action="#{manageUsersView.deleteSelectedUser}"
@@ -33,7 +33,7 @@
                     </p:column>
                 </p:dataTable>
                 <!-- TODO -->
-                <p:button value="Neu"/>
+                <p:button value="Neu" outcome="create_user"/>
                 <p:button value="Zurück" outcome="menu"/>
             </h:form>
         </ui:define>

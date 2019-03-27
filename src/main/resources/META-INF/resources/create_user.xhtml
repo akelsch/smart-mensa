@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+    <ui:composition template="template/template.xhtml">
+        <ui:define name="title">Benutzer erstellen und ändern</ui:define>
+        <ui:define name="main">
+            <h1>Benutzer erstellen und ändern</h1>
+            <h:form>
+                <h:panelGrid id="grid" columns="3" cellpadding="5">
+                    <p:outputLabel for="name" value="Benutzername: "/>
+                    <p:inputText id="name" value="#{userView.username}" required="true"
+                                 requiredMessage="Bitte einen Benutzername eingeben"/>
+                    <p:message for="name"/>
+
+                    <p:outputLabel for="role" value="Rolle: "/>
+                    <p:selectOneListbox id="role" value="#{userView.role}" required="true"
+                                        requiredMessage="Bitte eine Rolle auswählen">
+                        <f:selectItem itemLabel="Administrator" itemValue="ADMIN"/>
+                        <f:selectItem itemLabel="User" itemValue="USER"/>
+                    </p:selectOneListbox>
+                    <p:message for="role"/>
+
+                    <p:outputLabel for="password" value="Passwort: "/>
+                    <p:inputText id="password" value="#{userView.password}" required="true"
+                                 requiredMessage="Bitte ein Passwort eingeben"/>
+                    <p:message for="password"/>
+                </h:panelGrid>
+
+                <p:commandButton value="Speichern" action="#{userView.saveUser}" update="grid"/>
+                <p:button value="Abbrechen" outcome="manage_users"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
