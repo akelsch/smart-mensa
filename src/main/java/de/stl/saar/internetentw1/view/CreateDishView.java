@@ -12,11 +12,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.Optional;
 
 @ManagedBean
 @ViewScoped
-public class DishView implements Serializable {
+public class CreateDishView implements Serializable {
+
+    private long id;
 
     @Getter
     @Setter
@@ -28,32 +29,31 @@ public class DishView implements Serializable {
 
     @Getter
     @Setter
-    private String category;
+    private Category category;
 
     private final DishRepository dishRepository;
 
-    private long id;
-
     @Inject
-    public DishView(DishRepository dishRepository) {
+    public CreateDishView(DishRepository dishRepository) {
         this.dishRepository = dishRepository;
     }
 
     @PostConstruct
     public void init() {
-        name = FacesContextUtils.getRequestParameterValue("dishName");
-        Optional<Dish> optionalDish = dishRepository.findByName(name);
-        optionalDish.ifPresent(dish -> {
-            price = dish.getPrice();
-            category = dish.getCategory().name();
+        Object o = FacesContextUtils.getFlashObject("dish");
+        if (o instanceof Dish) {
+            Dish dish = (Dish) o;
             id = dish.getId();
-        });
+            name = dish.getName();
+            price = dish.getPrice();
+            category = dish.getCategory();
+        }
     }
 
     public String saveDish() {
-        Dish dish = new Dish(name, price, Category.valueOf(category), "");
-        dish.setId(id);
-        dishRepository.save(dish);
+        Dish dish = new Dish(name, price, category);
+        dishRepository.save(dish.withId(id));
+
         return "manage_dishes";
     }
 }

@@ -41,9 +41,9 @@ public class SmartMensaApplication {
     public CommandLineRunner init() {
         return args -> {
             // User
-            User user1 = new User("colbertz", "1234", "colbertz@htw.de", Role.ADMIN);
-            User user2 = new User("wpy", "qwertz", "wpy@htw.de", Role.USER);
-            User user3 = new User("api", "5678", "api@htw.de", Role.USER);
+            User user1 = new User("colbertz", "1234", "colbertz@htwsaar.de", Role.ADMIN);
+            User user2 = new User("wpy", "qwertz", "wpy@htwsaar.de", Role.USER);
+            User user3 = new User("api", "5678", "api@htwsaar.de", Role.USER);
 
             // Dish
             Dish dish1 = new Dish("Baumkuchen", 2.0, Category.DESSERT, "baumkuchen");

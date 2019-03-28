@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @ManagedBean
 @ViewScoped
-public class UserView implements Serializable {
+public class CreateUserView implements Serializable {
 
     @Getter
     @Setter
@@ -40,7 +40,7 @@ public class UserView implements Serializable {
     private long id;
 
     @Inject
-    public UserView(UserRepository userRepository) {
+    public CreateUserView(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

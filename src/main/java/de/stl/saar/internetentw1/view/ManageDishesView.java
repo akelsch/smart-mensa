@@ -4,6 +4,7 @@ import de.stl.saar.internetentw1.model.Dish;
 import de.stl.saar.internetentw1.repository.DishRepository;
 import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -18,6 +19,10 @@ public class ManageDishesView implements Serializable {
     @Getter
     private Iterable<Dish> dishes;
 
+    @Getter
+    @Setter
+    private Dish selectedDish;
+
     private final DishRepository dishRepository;
 
     @Inject
@@ -30,9 +35,19 @@ public class ManageDishesView implements Serializable {
         dishes = dishRepository.findAll();
     }
 
+    public String changeSelectedDish() {
+        if (selectedDish != null) {
+            FacesContextUtils.putFlashObject("dish", selectedDish);
+            return "create_dish?faces-redirect=true";
+        }
+
+        return "";
+    }
+
     public void deleteSelectedDish() {
-        Long id = Long.parseLong(FacesContextUtils.getRequestParameterValue("dishId"));
-        dishRepository.deleteById(id);
-        dishes = dishRepository.findAll();
+        if (selectedDish != null) {
+            dishRepository.delete(selectedDish);
+            dishes = dishRepository.findAll();
+        }
     }
 }
