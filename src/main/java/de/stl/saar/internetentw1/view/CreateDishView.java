@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.Optional;
 
 @ManagedBean
 @ViewScoped
@@ -41,14 +42,13 @@ public class CreateDishView implements Serializable {
 
     @PostConstruct
     public void init() {
-        Object o = FacesContextUtils.getFlashObject("dish");
-        if (o instanceof Dish) {
-            Dish dish = (Dish) o;
-            id = dish.getId();
-            name = dish.getName();
-            price = dish.getPrice();
-            category = dish.getCategory();
-        }
+        Optional<Dish> dish = FacesContextUtils.getFlashObject("dish", Dish.class);
+        dish.ifPresent(d -> {
+            id = d.getId();
+            name = d.getName();
+            price = d.getPrice();
+            category = d.getCategory();
+        });
     }
 
     /**

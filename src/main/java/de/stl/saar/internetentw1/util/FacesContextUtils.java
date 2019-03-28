@@ -5,6 +5,7 @@ import lombok.experimental.UtilityClass;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import java.util.Optional;
 
 /**
  * Werkzeugklasse mit Methoden zum Arbeiten mit {@link FacesContext}.
@@ -23,20 +24,44 @@ public final class FacesContextUtils {
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", message));
     }
 
-    public static void putFlashObject(String key, Object value) {
+    /**
+     * Fügt dem Flash ein Objekt an der Stelle {@code key} hinzu.
+     * <p>
+     * Flash ist eine Map Implementierung und erlaubt es Objekte zwischen zwei
+     * {@code ViewScoped} Beans nach einem Redirect auszutauschen.
+     *
+     * @param key   Der Schlüssel des zu speichernden Objekts
+     * @param value Der Wert des zu speichernden Objekts
+     * @param <T>   Der Typ des zu speichernden Objekts
+     */
+    public static <T> void putFlashObject(String key, T value) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Flash flash = facesContext.getExternalContext().getFlash();
         flash.put(key, value);
     }
 
-    public static Object getFlashObject(String key) {
+    /**
+     * Liefert ein Objekt aus dem Flash an der Stelle {@code key}.
+     *
+     * @param key   Der Schlüssel des gesuchten Objekts
+     * @param clazz Der Typ des gesuchten Objekts als {@link Class} zum casten
+     * @param <T>   Der Typ des gesuchten Objekts
+     * @return Das gesuchte Objekt in einem {@link Optional} verpackt oder ein
+     * leeres {@link Optional}, falls das Objekt nicht existiert oder vom
+     * falschen Typ ist
+     */
+    public static <T> Optional<T> getFlashObject(String key, Class<T> clazz) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Flash flash = facesContext.getExternalContext().getFlash();
 
-        if (flash.containsKey(key))
-            return flash.get(key);
+        // Notwendig, da es sonst zu einer NullPointerException kommt
+        if (flash.containsKey(key)) {
+            return Optional.of(flash.get(key))
+                    .filter(clazz::isInstance)
+                    .map(clazz::cast);
+        }
 
-        return null;
+        return Optional.empty();
     }
 
     public static String getRequestParameterValue(String parameter) {
