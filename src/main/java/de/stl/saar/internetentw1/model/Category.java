@@ -18,5 +18,5 @@ public enum Category {
     MAIN_DISH("Hauptgericht");
 
     @Getter
-    private final String value;
+    private final String label;
 }

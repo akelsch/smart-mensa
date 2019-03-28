@@ -17,6 +17,7 @@ import java.io.Serializable;
 @ViewScoped
 public class CreateDishView implements Serializable {
 
+    @Getter
     private long id;
 
     @Getter
@@ -50,10 +51,28 @@ public class CreateDishView implements Serializable {
         }
     }
 
+    /**
+     * Hilfsmethode, die alle Kategorien aus dem {@link Category} Enum liefert
+     * (nützlich für eine Auswahlliste im XHTML).
+     *
+     * @return Ein Array mit allen möglichen Werten aus dem Enum
+     */
+    public Category[] getCategories() {
+        return Category.values();
+    }
+
+    /**
+     * Speichert ein Gericht mit den ausgefüllten Input-Feldern in der Datenbank.
+     * <p>
+     * Existiert die ID des Gerichts bereits, erfolgt ein Update. Ansonsten
+     * erhält das Gericht eine neue ID.
+     *
+     * @return Ein Redirect zurück auf die tabellarische Übersicht der Gerichte
+     */
     public String saveDish() {
         Dish dish = new Dish(name, price, category);
         dishRepository.save(dish.withId(id));
 
-        return "manage_dishes";
+        return "manage_dishes?faces-redirect=true";
     }
 }

@@ -11,7 +11,7 @@
             <h1>Gerichte verwalten</h1>
             <h:form>
                 <p:dataTable id="dataTable" var="dish" value="#{manageDishesView.dishes}" selectionMode="single"
-                             selection="#{manageDishesView.selectedDish}" rowKey="#{dish.id}" style="max-width: 50%;">
+                             selection="#{manageDishesView.selectedDish}" rowKey="#{dish.id}" style="max-width: 800px">
                     <p:column headerText="Nummer">
                         <h:outputText value="#{dish.id}"/>
                     </p:column>
@@ -22,7 +22,7 @@
                         <h:outputText value="#{dish.price}"/>
                     </p:column>
                     <p:column headerText="Kategorie">
-                        <h:outputText value="#{dish.category.value}"/>
+                        <h:outputText value="#{dish.category.label}"/>
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton value="Ändern" action="#{manageDishesView.changeSelectedDish}"/>
