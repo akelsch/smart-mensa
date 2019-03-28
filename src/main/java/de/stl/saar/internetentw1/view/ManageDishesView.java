@@ -35,6 +35,13 @@ public class ManageDishesView implements Serializable {
         dishes = dishRepository.findAll();
     }
 
+    /**
+     * Leitet auf die Seite zum Ändern eines Gerichts um, falls ein Gericht in
+     * der PrimeFaces DataTable ausgewählt wurde.
+     *
+     * @return Ein Redirect auf {@code create_dish.xhtml}, falls in der Tabelle
+     * eine Auswahl getroffen wurde
+     */
     public String changeSelectedDish() {
         if (selectedDish != null) {
             FacesContextUtils.putFlashObject("dish", selectedDish);
@@ -44,6 +51,10 @@ public class ManageDishesView implements Serializable {
         return "";
     }
 
+    /**
+     * Löscht ein Gericht aus der Datenbank, falls in der PrimeFaces DataTable
+     * eine Auswahl getroffen wurde.
+     */
     public void deleteSelectedDish() {
         if (selectedDish != null) {
             dishRepository.delete(selectedDish);
