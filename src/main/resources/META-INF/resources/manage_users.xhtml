@@ -11,7 +11,7 @@
             <h1>Benutzer verwalten</h1>
             <h:form>
                 <p:dataTable id="dataTable" var="user" value="#{manageUsersView.users}" selectionMode="single"
-                             rowKey="#{user.id}" style="max-width: 50%;">
+                             selection="#{manageUsersView.selectedUser}" rowKey="#{user.id}" style="max-width: 800px;">
                     <p:column headerText="Nummer">
                         <h:outputText value="#{user.id}"/>
                     </p:column>
@@ -22,20 +22,14 @@
                         <h:outputText value="#{user.email}"/>
                     </p:column>
                     <p:column headerText="Rolle">
-                        <h:outputText value="#{user.role.value}"/>
+                        <h:outputText value="#{user.role.label}"/>
                     </p:column>
-                    <p:column>
-                        <!-- TODO -->
-                        <p:commandButton value="Ändern" action="create_user">
-                            <f:param name="userName" value="#{user.username}"/>
-                        </p:commandButton>
+                    <f:facet name="footer">
+                        <p:commandButton value="Ändern" action="#{manageUsersView.changeSelectedUser}"/>
                         <p:commandButton value="Löschen" action="#{manageUsersView.deleteSelectedUser}"
-                                         update="dataTable">
-                            <f:param name="userId" value="#{user.id}"/>
-                        </p:commandButton>
-                    </p:column>
+                                         update="dataTable"/>
+                    </f:facet>
                 </p:dataTable>
-                <!-- TODO -->
                 <p:button value="Neu" outcome="create_user"/>
                 <p:button value="Zurück" outcome="menu"/>
             </h:form>

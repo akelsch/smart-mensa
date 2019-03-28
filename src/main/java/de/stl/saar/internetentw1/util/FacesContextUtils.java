@@ -63,9 +63,4 @@ public final class FacesContextUtils {
 
         return Optional.empty();
     }
-
-    public static String getRequestParameterValue(String parameter) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        return facesContext.getExternalContext().getRequestParameterMap().get(parameter);
-    }
 }

@@ -20,6 +20,9 @@ import java.util.Optional;
 public class CreateUserView implements Serializable {
 
     @Getter
+    private long id;
+
+    @Getter
     @Setter
     private String username;
 
@@ -33,11 +36,9 @@ public class CreateUserView implements Serializable {
 
     @Getter
     @Setter
-    private String role;
+    private Role role;
 
     private final UserRepository userRepository;
-
-    private long id;
 
     @Inject
     public CreateUserView(UserRepository userRepository) {
@@ -46,21 +47,39 @@ public class CreateUserView implements Serializable {
 
     @PostConstruct
     public void init() {
-        username = FacesContextUtils.getRequestParameterValue("userName");
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-        optionalUser.ifPresent(user -> {
-            password = user.getPassword();
-            email = user.getEmail();
-            role = user.getRole().name();
-            id = user.getId();
+        Optional<User> user = FacesContextUtils.getFlashObject("user", User.class);
+        user.ifPresent(u -> {
+            id = u.getId();
+            username = u.getUsername();
+            password = u.getPassword();
+            email = u.getEmail();
+            role = u.getRole();
         });
     }
 
+    /**
+     * Hilfsmethode, die alle Rollen aus dem {@link Role} Enum liefert
+     * (nützlich für eine Auswahlliste im XHTML).
+     *
+     * @return Ein Array mit allen möglichen Werten aus dem Enum
+     */
+    public Role[] getRoles() {
+        return Role.values();
+    }
+
+    /**
+     * Speichert einen Benutzer mit den ausgefüllten Input-Feldern in der Datenbank.
+     * <p>
+     * Existiert die ID des Benutzers bereits, erfolgt ein Update. Ansonsten
+     * erhält der Benutzer eine neue ID.
+     *
+     * @return Ein Redirect zurück auf die tabellarische Übersicht der Benutzer
+     */
     public String saveUser() {
-        User user = new User(username, password, email, Role.valueOf(role));
-        user.setId(id);
-        userRepository.save(user);
-        return "manage_users";
+        User user = new User(username, password, email, role);
+        userRepository.save(user.withId(id));
+
+        return "manage_users?faces-redirect=true";
     }
 
     public void newPassword() {

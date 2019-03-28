@@ -1,7 +1,9 @@
 package de.stl.saar.internetentw1.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Wither;
 
 import javax.persistence.*;
 
@@ -10,11 +12,13 @@ import javax.persistence.*;
  */
 @Entity
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Wither
     private Long id;
 
     private String username;

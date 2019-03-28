@@ -4,6 +4,7 @@ import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
 import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -18,6 +19,10 @@ public class ManageUsersView implements Serializable {
     @Getter
     private Iterable<User> users;
 
+    @Getter
+    @Setter
+    private User selectedUser;
+
     private final UserRepository userRepository;
 
     @Inject
@@ -30,9 +35,30 @@ public class ManageUsersView implements Serializable {
         users = userRepository.findAll();
     }
 
+    /**
+     * Leitet auf die Seite zum Ändern eines Benutzers um, falls ein Benutzer in
+     * der PrimeFaces DataTable ausgewählt wurde.
+     *
+     * @return Ein Redirect auf {@code create_user.xhtml}, falls in der Tabelle
+     * eine Auswahl getroffen wurde
+     */
+    public String changeSelectedUser() {
+        if (selectedUser != null) {
+            FacesContextUtils.putFlashObject("user", selectedUser);
+            return "create_user?faces-redirect=true";
+        }
+
+        return "";
+    }
+
+    /**
+     * Löscht einen Benutzer aus der Datenbank, falls in der PrimeFaces DataTable
+     * eine Auswahl getroffen wurde.
+     */
     public void deleteSelectedUser() {
-        Long id = Long.parseLong(FacesContextUtils.getRequestParameterValue("userId"));
-        userRepository.deleteById(id);
-        users = userRepository.findAll();
+        if (selectedUser != null) {
+            userRepository.delete(selectedUser);
+            users = userRepository.findAll();
+        }
     }
 }

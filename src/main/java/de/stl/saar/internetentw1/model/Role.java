@@ -15,5 +15,5 @@ public enum Role {
     USER("Benutzer");
 
     @Getter
-    private final String value;
+    private final String label;
 }
