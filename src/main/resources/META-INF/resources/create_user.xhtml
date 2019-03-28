@@ -40,7 +40,15 @@
                     <p:inputText id="password" value="#{createUserView.password}" required="true"
                                  requiredMessage="Bitte ein Passwort eingeben"/>
                     <p:message for="password"/>
-                    <p:commandButton value="Neues Passwort" action="#{createUserView.newPassword}" update="grid"/>
+
+                    <!-- TODO Logik implementieren + Checkbox aktivieren, wenn Admin neues Passwort generiert -->
+                    <p:selectBooleanCheckbox value="" itemLabel="Passwort zurücksetzen"/>
+                    <h:panelGroup/>
+                    <h:panelGroup/>
+
+                    <!-- TODO Passwort generieren, wenn Passwort Feld leer ist -->
+                    <p:commandButton value="Neues Passwort" action="#{createUserView.newPassword}"
+                                     process="@this,password" update="grid"/>
                 </h:panelGrid>
 
                 <p:commandButton value="Speichern" action="#{createUserView.saveUser}" update="grid"/>
