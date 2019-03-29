@@ -1,5 +1,6 @@
 package de.stl.saar.internetentw1.view;
 
+import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
 import de.stl.saar.internetentw1.util.FacesContextUtils;
@@ -10,6 +11,7 @@ import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Optional;
 
@@ -52,5 +54,21 @@ public class LoginView implements Serializable {
         FacesContextUtils.addGlobalErrorMessage("Authentifizierung fehlgeschlagen!");
 
         return "index";
+    }
+
+    public void checkIfLoggedIn() throws IOException {
+        if (user == null) {
+            FacesContextUtils.keepMessages();
+            FacesContextUtils.addGlobalErrorMessage("Nicht eingeloggt oder Session abgelaufen!");
+            FacesContextUtils.redirectTo("index.xhtml");
+        }
+    }
+
+    public void checkIfAdmin() throws IOException {
+        if (user.getRole() != Role.ADMIN) {
+            FacesContextUtils.keepMessages();
+            FacesContextUtils.addGlobalInfoMessage("Dieser Bereich ist nur für Admins ;)");
+            FacesContextUtils.redirectTo("menu.xhtml");
+        }
     }
 }

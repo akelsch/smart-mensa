@@ -5,6 +5,7 @@ import lombok.experimental.UtilityClass;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -22,6 +23,17 @@ public final class FacesContextUtils {
     public static void addGlobalErrorMessage(String message) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", message));
+    }
+
+    /**
+     * Fügt dem aktuellen JSF-Kontext eine globale Nachricht mit dem Level
+     * "Info" hinzu.
+     *
+     * @param message Der Inhalt der Nachricht
+     */
+    public static void addGlobalInfoMessage(String message) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", message));
     }
 
     /**
@@ -62,5 +74,24 @@ public final class FacesContextUtils {
         }
 
         return Optional.empty();
+    }
+
+    /**
+     * Bewahrt {@link FacesMessage} nach Redirects auf.
+     */
+    public static void keepMessages() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+    }
+
+    /**
+     * Startet einen Redirect zu der angegebenen Seite.
+     *
+     * @param destination Die Ziel XHTML des Redirects
+     * @throws IOException wenn der Redirect fehlschlägt
+     */
+    public static void redirectTo(String destination) throws IOException {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect(destination);
     }
 }
