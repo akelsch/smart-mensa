@@ -97,14 +97,13 @@ public final class FacesContextUtils {
         facesContext.getExternalContext().redirect(destination);
     }
 
-    public static void setLocale(Locale locale){
+    public static void setLocale(Locale locale) {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
     }
 
-    public static String getMessage(String key){
-        FacesContext facesContext =FacesContext.getCurrentInstance();
-        ResourceBundle resourceBundle = FacesContext.getCurrentInstance().getApplication()
-                .getResourceBundle(facesContext, "msg");
+    public static String getMessage(String key) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ResourceBundle resourceBundle = facesContext.getApplication().getResourceBundle(facesContext, "msg");
         return resourceBundle.getString(key);
     }
 }
