@@ -53,7 +53,7 @@ public class LoginView implements Serializable {
 
         FacesContextUtils.addGlobalErrorMessage("Authentifizierung fehlgeschlagen!");
 
-        return "index";
+        return "";
     }
 
     public void checkIfLoggedIn() throws IOException {

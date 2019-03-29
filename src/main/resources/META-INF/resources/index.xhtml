@@ -12,6 +12,12 @@
             <h:form>
                 <f:event listener="#{loginView.clearForm}" type="preRenderView"/>
 
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:messages globalOnly="true" showDetail="true" closable="true">
+                        <p:autoUpdate/>
+                    </p:messages>
+                </h:panelGrid>
+
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <p:outputLabel for="username" value="Benutzername:"/>
                     <p:inputText id="username" value="#{loginView.username}" required="true"
@@ -22,9 +28,6 @@
                     <p:inputText id="password" value="#{loginView.password}" required="true"
                                  requiredMessage="Bitte ein Passwort eingeben"/>
                     <p:message for="password"/>
-
-                    <!-- TODO über panel grid verschieben? -->
-                    <p:messages globalOnly="true" showDetail="true" closable="true"/>
                 </h:panelGrid>
 
                 <p:commandButton value="Anmelden" action="#{loginView.login}" update="grid"/>
