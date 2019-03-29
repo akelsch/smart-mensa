@@ -52,9 +52,12 @@
                     <h:panelGroup/>
                     <h:panelGroup/>
 
-                    <!-- TODO Passwort generieren, wenn Passwort Feld leer ist -->
-                    <p:commandButton value="Neues Passwort" action="#{createUserView.newPassword}"
-                                     process="@this,password" update="grid"/>
+                    <p:commandButton value="Neues Passwort" action="#{createUserView.generateRandomPassword}"
+                                     process="@this" update="password"/>
+                    <h:panelGroup/>
+                    <h:panelGroup/>
+
+                    <h:panelGroup/>
                 </h:panelGrid>
 
                 <p:commandButton value="Speichern" action="#{createUserView.saveUser}" update="grid"/>

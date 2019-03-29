@@ -67,6 +67,15 @@ public class CreateUserView implements Serializable {
         return Role.values();
     }
 
+
+    /**
+     * Generiert ein zufälliges Passwort der Länge 10 bestehend aus den Zeichen
+     * a-z, A-Z und 0-9.
+     */
+    public void generateRandomPassword() {
+        password = RandomStringUtils.randomAlphanumeric(10);
+    }
+
     /**
      * Speichert einen Benutzer mit den ausgefüllten Input-Feldern in der Datenbank.
      * <p>
@@ -80,9 +89,5 @@ public class CreateUserView implements Serializable {
         userRepository.save(user.withId(id));
 
         return "manage_users?faces-redirect=true";
-    }
-
-    public void newPassword() {
-        password = RandomStringUtils.randomAlphanumeric(10);
     }
 }
