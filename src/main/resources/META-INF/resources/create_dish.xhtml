@@ -24,22 +24,22 @@
                         <p:message for="id"/>
                     </c:if>
 
-                    <p:outputLabel for="name" value="Name:"/>
+                    <p:outputLabel for="name" value="#{labels.labelDishName}"/>
                     <p:inputText id="name" value="#{createDishView.name}" required="true"
-                                 requiredMessage="Bitte einen Namen für das Gericht eingeben"/>
+                                 requiredMessage="#{msg.dishNameRequired}"/>
                     <p:message for="name"/>
 
-                    <p:outputLabel for="price" value="Preis:"/>
+                    <p:outputLabel for="price" value="#{labels.labelDishPrice}"/>
                     <p:inputNumber id="price" value="#{createDishView.price}" required="true"
-                                   requiredMessage="Bitte einen Preis für das Gericht eingeben"
-                                   validatorMessage="Der Preis muss zwischen 0,5€ und 5,50€ liegen">
+                                   requiredMessage="#{msg.dishPriceRequired}"
+                                   validatorMessage="#{msg.priceValidatorError}">
                         <f:validateDoubleRange minimum="0.5" maximum="5.5"/>
                     </p:inputNumber>
                     <p:message for="price"/>
 
-                    <p:outputLabel for="category" value="Kategorie:"/>
+                    <p:outputLabel for="category" value="#{labels.labelDishCategory}"/>
                     <p:selectOneListbox id="category" value="#{createDishView.category}" required="true"
-                                        requiredMessage="Bitte eine Kategorie auswählen">
+                                        requiredMessage="#{msg.dishCategoryRequired}">
                         <f:selectItems value="#{createDishView.categories}" var="category"
                                        itemValue="#{category}" itemLabel="#{category.label}"/>
                     </p:selectOneListbox>
@@ -48,8 +48,8 @@
                     <!-- TODO Bild Upload -->
                 </h:panelGrid>
 
-                <p:commandButton value="Speichern" action="#{createDishView.saveDish}" update="grid"/>
-                <p:button value="Abbrechen" outcome="manage_dishes"/>
+                <p:commandButton value="#{labels.buttonSave}" action="#{createDishView.saveDish}" update="grid"/>
+                <p:button value="#{labels.buttonCancel}" outcome="manage_dishes"/>
             </h:form>
         </ui:define>
     </ui:composition>

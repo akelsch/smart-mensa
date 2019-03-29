@@ -21,14 +21,17 @@
                 <p:messages globalOnly="true" showDetail="true" closable="true"/>
             </h:panelGrid>
 
-            <h:outputText value="Hallo, #{loginView.user.username}!"/><br/>
+            <h:outputFormat value="#{msg.greeting}">
+                <f:param value="#{loginView.user.username}"/>
+            </h:outputFormat>
+            <br/>
             <c:if test="#{loginView.user.role == 'ADMIN'}">
-                <h:link value="Zur Verwaltung der Gerichte" outcome="manage_dishes"/><br/>
-                <h:link value="Zur Benutzerverwaltung" outcome="manage_users"/><br/>
+                <h:link value="#{labels.labelManageDishes}" outcome="manage_dishes"/><br/>
+                <h:link value="#{labels.labelManageUsers}" outcome="manage_users"/><br/>
             </c:if>
-            <h:link value="Eigenes Profil ändern"/><br/>
-            <h:link value="Zur Bestellung"/><br/>
-            <h:link value="Ausloggen" outcome="index"/>
+            <h:link value="#{labels.labelChangeProfil}"/><br/>
+            <h:link value="#{labels.labelOrder}"/><br/>
+            <h:link value="#{labels.labelLogOut}" outcome="index"/>
         </ui:define>
     </ui:composition>
 </h:body>

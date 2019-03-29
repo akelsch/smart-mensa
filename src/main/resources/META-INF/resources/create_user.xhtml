@@ -64,8 +64,8 @@
                     <h:panelGroup/>
                 </h:panelGrid>
 
-                <p:commandButton value="Speichern" action="#{createUserView.saveUser}" update="grid"/>
-                <p:button value="Abbrechen" outcome="manage_users"/>
+                <p:commandButton value="#{labels.buttonSave}" action="#{createUserView.saveUser}" update="grid"/>
+                <p:button value="#{labels.buttonCancel}" outcome="manage_users"/>
             </h:form>
         </ui:define>
     </ui:composition>

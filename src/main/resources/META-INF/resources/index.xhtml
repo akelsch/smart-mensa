@@ -23,18 +23,18 @@
 
             <h:form>
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
-                    <p:outputLabel for="username" value="Benutzername:"/>
+                    <p:outputLabel for="username" value="#{labels.labelUsername}"/>
                     <p:inputText id="username" value="#{loginView.username}" required="true"
-                                 requiredMessage="Bitte einen Benutzernamen eingeben"/>
+                                 requiredMessage="#{msg.usernameRequired}"/>
                     <p:message for="username"/>
 
-                    <p:outputLabel for="password" value="Passwort:"/>
+                    <p:outputLabel for="password" value="#{labels.labelPassword}"/>
                     <p:inputText id="password" value="#{loginView.password}" required="true"
                                  requiredMessage="Bitte ein Passwort eingeben"/>
                     <p:message for="password"/>
                 </h:panelGrid>
 
-                <p:commandButton value="Anmelden" action="#{loginView.login}" update="grid"/>
+                <p:commandButton value="#{labels.buttonLogin}" action="#{loginView.login}" update="grid"/>
             </h:form>
         </ui:define>
     </ui:composition>

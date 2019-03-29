@@ -18,26 +18,26 @@
             <h:form>
                 <p:dataTable id="dataTable" var="dish" value="#{manageDishesView.dishes}" selectionMode="single"
                              selection="#{manageDishesView.selectedDish}" rowKey="#{dish.id}" style="max-width: 800px">
-                    <p:column headerText="Nummer">
+                    <p:column headerText="#{labels.labelNumber}">
                         <h:outputText value="#{dish.id}"/>
                     </p:column>
-                    <p:column headerText="Name">
+                    <p:column headerText="#{labels.labelName}">
                         <h:outputText value="#{dish.name}"/>
                     </p:column>
-                    <p:column headerText="Preis">
+                    <p:column headerText="#{labels.labelPrice}">
                         <h:outputText value="#{dish.price}"/>
                     </p:column>
-                    <p:column headerText="Kategorie">
+                    <p:column headerText="labels.labelCategory">
                         <h:outputText value="#{dish.category.label}"/>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton value="Ändern" action="#{manageDishesView.changeSelectedDish}"/>
-                        <p:commandButton value="Löschen" action="#{manageDishesView.deleteSelectedDish}"
+                        <p:commandButton value="#{labels.buttonChange}" action="#{manageDishesView.changeSelectedDish}"/>
+                        <p:commandButton value="#{labels.buttonDelete}" action="#{manageDishesView.deleteSelectedDish}"
                                          update="dataTable"/>
                     </f:facet>
                 </p:dataTable>
-                <p:button value="Neu" outcome="create_dish"/>
-                <p:button value="Zurück" outcome="menu"/>
+                <p:button value="#{labels.buttonNew}" outcome="create_dish"/>
+                <p:button value="#{labels.buttonBack}" outcome="menu"/>
             </h:form>
         </ui:define>
     </ui:composition>
