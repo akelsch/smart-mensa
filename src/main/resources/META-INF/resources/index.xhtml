@@ -14,13 +14,14 @@
         <ui:define name="title">Startseite</ui:define>
         <ui:define name="main">
             <h1>SmartMensa Login</h1>
-            <h:form>
-                <h:panelGrid columns="3" cellpadding="5">
-                    <p:messages globalOnly="true" showDetail="true" closable="true">
-                        <p:autoUpdate/>
-                    </p:messages>
-                </h:panelGrid>
 
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:messages globalOnly="true" showDetail="true" closable="true">
+                    <p:autoUpdate/>
+                </p:messages>
+            </h:panelGrid>
+
+            <h:form>
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <p:outputLabel for="username" value="Benutzername:"/>
                     <p:inputText id="username" value="#{loginView.username}" required="true"
