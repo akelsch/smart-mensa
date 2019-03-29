@@ -12,9 +12,9 @@
                 <f:viewAction action="#{loginView.checkIfAdmin}"/>
             </f:metadata>
         </ui:define>
-        <ui:define name="title">Gerichte verwalten</ui:define>
+        <ui:define name="title">#{labels.labelManageDish}</ui:define>
         <ui:define name="main">
-            <h1>Gerichte verwalten</h1>
+            <h1>#{labels.labelManageDish}</h1>
             <h:form>
                 <p:dataTable id="dataTable" var="dish" value="#{manageDishesView.dishes}" selectionMode="single"
                              selection="#{manageDishesView.selectedDish}" rowKey="#{dish.id}" style="max-width: 800px">
@@ -27,7 +27,7 @@
                     <p:column headerText="#{labels.labelPrice}">
                         <h:outputText value="#{dish.price}"/>
                     </p:column>
-                    <p:column headerText="labels.labelCategory">
+                    <p:column headerText="#{labels.labelCategory}">
                         <h:outputText value="#{dish.category.label}"/>
                     </p:column>
                     <f:facet name="footer">

@@ -12,9 +12,9 @@
                 <f:viewAction action="#{loginView.checkIfAdmin}"/>
             </f:metadata>
         </ui:define>
-        <ui:define name="title">Benutzer verwalten</ui:define>
+        <ui:define name="title">#{labels.labelManageUser}</ui:define>
         <ui:define name="main">
-            <h1>Benutzer verwalten</h1>
+            <h1>#{labels.labelManageUser}</h1>
             <h:form>
                 <p:dataTable id="dataTable" var="user" value="#{manageUsersView.users}" selectionMode="single"
                              selection="#{manageUsersView.selectedUser}" rowKey="#{user.id}" style="max-width: 800px;">

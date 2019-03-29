@@ -13,9 +13,9 @@
                 <f:viewAction action="#{loginView.checkIfAdmin}"/>
             </f:metadata>
         </ui:define>
-        <ui:define name="title">Gerichte erstellen und ändern</ui:define>
+        <ui:define name="title">#{labels.labelCreateDish}</ui:define>
         <ui:define name="main">
-            <h1>Gerichte erstellen und ändern</h1>
+            <h1>#{labels.labelCreateDish}</h1>
             <h:form>
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <c:if test="#{createDishView.id != 0}">

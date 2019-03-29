@@ -13,9 +13,9 @@
                 <f:viewAction action="#{loginView.checkIfAdmin}"/>
             </f:metadata>
         </ui:define>
-        <ui:define name="title">Benutzer erstellen und ändern</ui:define>
+        <ui:define name="title">#{labels.labelCreateUser}</ui:define>
         <ui:define name="main">
-            <h1>Benutzer erstellen und ändern</h1>
+            <h1>#{labels.labelCreateUser}</h1>
             <h:form>
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <c:if test="#{createUserView.id != 0}">

@@ -1,12 +1,12 @@
 package de.stl.saar.internetentw1.view;
 
+import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -38,7 +38,7 @@ public class I18nBean implements Serializable {
         for (Map.Entry<String, Locale> entry : locales.entrySet()) {
 
             if (entry.getValue().getLanguage().equals(newLocaleValue)) {
-                FacesContext.getCurrentInstance().getViewRoot().setLocale(entry.getValue());
+                FacesContextUtils.setLocale(entry.getValue());
             }
         }
     }

@@ -6,7 +6,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 /**
  * Werkzeugklasse mit Methoden zum Arbeiten mit {@link FacesContext}.
@@ -93,5 +95,16 @@ public final class FacesContextUtils {
     public static void redirectTo(String destination) throws IOException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect(destination);
+    }
+
+    public static void setLocale(Locale locale){
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+    }
+
+    public static String getMessage(String key){
+        FacesContext facesContext =FacesContext.getCurrentInstance();
+        ResourceBundle resourceBundle = FacesContext.getCurrentInstance().getApplication()
+                .getResourceBundle(facesContext, "msg");
+        return resourceBundle.getString(key);
     }
 }

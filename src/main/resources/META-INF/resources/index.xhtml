@@ -30,7 +30,7 @@
 
                     <p:outputLabel for="password" value="#{labels.labelPassword}"/>
                     <p:inputText id="password" value="#{loginView.password}" required="true"
-                                 requiredMessage="Bitte ein Passwort eingeben"/>
+                                 requiredMessage="#{msg.passwordRequired}"/>
                     <p:message for="password"/>
                 </h:panelGrid>
 
