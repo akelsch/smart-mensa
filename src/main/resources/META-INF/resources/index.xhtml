@@ -6,12 +6,15 @@
       xmlns:p="http://primefaces.org/ui">
 <h:body>
     <ui:composition template="template/template.xhtml">
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:event listener="#{loginView.clearForm}" type="preRenderView"/>
+            </f:metadata>
+        </ui:define>
         <ui:define name="title">Startseite</ui:define>
         <ui:define name="main">
             <h1>SmartMensa Login</h1>
             <h:form>
-                <f:event listener="#{loginView.clearForm}" type="preRenderView"/>
-
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:messages globalOnly="true" showDetail="true" closable="true">
                         <p:autoUpdate/>
