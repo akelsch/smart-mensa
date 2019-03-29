@@ -1,17 +1,19 @@
 package de.stl.saar.internetentw1.view;
 
+import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
+import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Optional;
 
 @ManagedBean
 @SessionScoped
@@ -42,18 +44,31 @@ public class LoginView implements Serializable {
     }
 
     public String login() {
-        User user = userRepository.findByUsername(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
-        if (user != null && user.getPassword().equals(password)) {
-            this.user = user;
+        if (user.isPresent() && user.get().getPassword().equals(password)) {
+            this.user = user.get();
             return "menu?faces-redirect=true";
         }
 
-        String messageText = "Authentifizierung fehlgeschlagen!";
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", messageText);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, message);
+        FacesContextUtils.addGlobalErrorMessage("Authentifizierung fehlgeschlagen!");
 
-        return "index";
+        return "";
+    }
+
+    public void checkIfLoggedIn() throws IOException {
+        if (user == null) {
+            FacesContextUtils.keepMessages();
+            FacesContextUtils.addGlobalErrorMessage("Nicht eingeloggt oder Session abgelaufen!");
+            FacesContextUtils.redirectTo("index.xhtml");
+        }
+    }
+
+    public void checkIfAdmin() throws IOException {
+        if (user.getRole() != Role.ADMIN) {
+            FacesContextUtils.keepMessages();
+            FacesContextUtils.addGlobalInfoMessage("Dieser Bereich ist nur für Admins ;)");
+            FacesContextUtils.redirectTo("menu.xhtml");
+        }
     }
 }

@@ -2,6 +2,7 @@ package de.stl.saar.internetentw1.view;
 
 import de.stl.saar.internetentw1.model.Dish;
 import de.stl.saar.internetentw1.repository.DishRepository;
+import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,5 +33,32 @@ public class ManageDishesView implements Serializable {
     @PostConstruct
     public void init() {
         dishes = dishRepository.findAll();
+    }
+
+    /**
+     * Leitet auf die Seite zum Ändern eines Gerichts um, falls ein Gericht in
+     * der PrimeFaces DataTable ausgewählt wurde.
+     *
+     * @return Ein Redirect auf {@code create_dish.xhtml}, falls in der Tabelle
+     * eine Auswahl getroffen wurde
+     */
+    public String changeSelectedDish() {
+        if (selectedDish != null) {
+            FacesContextUtils.putFlashObject("dish", selectedDish);
+            return "create_dish?faces-redirect=true";
+        }
+
+        return "";
+    }
+
+    /**
+     * Löscht ein Gericht aus der Datenbank, falls in der PrimeFaces DataTable
+     * eine Auswahl getroffen wurde.
+     */
+    public void deleteSelectedDish() {
+        if (selectedDish != null) {
+            dishRepository.delete(selectedDish);
+            dishes = dishRepository.findAll();
+        }
     }
 }

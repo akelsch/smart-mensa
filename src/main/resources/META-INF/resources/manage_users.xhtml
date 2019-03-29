@@ -6,29 +6,39 @@
       xmlns:p="http://primefaces.org/ui">
 <h:body>
     <ui:composition template="template/template.xhtml">
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewAction action="#{loginView.checkIfLoggedIn}"/>
+                <f:viewAction action="#{loginView.checkIfAdmin}"/>
+            </f:metadata>
+        </ui:define>
         <ui:define name="title">Benutzer verwalten</ui:define>
         <ui:define name="main">
             <h1>Benutzer verwalten</h1>
-            <p:dataTable var="user" value="#{manageUsersView.users}" selectionMode="single"
-                         selection="#{manageDishesView.selectedDish}" rowKey="#{user.id}" style="max-width: 50%;">
-                <p:column headerText="Nummer">
-                    <h:outputText value="#{user.id}"/>
-                </p:column>
-                <p:column headerText="Name">
-                    <h:outputText value="#{user.username}"/>
-                </p:column>
-                <p:column headerText="Rolle">
-                    <h:outputText value="#{user.role.value}"/>
-                </p:column>
-                <f:facet name="footer">
-                    <!-- TODO -->
-                    <p:commandButton value="Ändern"/>
-                    <p:commandButton value="Löschen"/>
-                </f:facet>
-            </p:dataTable>
-            <!-- TODO -->
-            <p:button value="Neu"/>
-            <p:button value="Zurück" outcome="menu"/>
+            <h:form>
+                <p:dataTable id="dataTable" var="user" value="#{manageUsersView.users}" selectionMode="single"
+                             selection="#{manageUsersView.selectedUser}" rowKey="#{user.id}" style="max-width: 800px;">
+                    <p:column headerText="Nummer">
+                        <h:outputText value="#{user.id}"/>
+                    </p:column>
+                    <p:column headerText="Name">
+                        <h:outputText value="#{user.username}"/>
+                    </p:column>
+                    <p:column headerText="Email">
+                        <h:outputText value="#{user.email}"/>
+                    </p:column>
+                    <p:column headerText="Rolle">
+                        <h:outputText value="#{user.role.label}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Ändern" action="#{manageUsersView.changeSelectedUser}"/>
+                        <p:commandButton value="Löschen" action="#{manageUsersView.deleteSelectedUser}"
+                                         update="dataTable"/>
+                    </f:facet>
+                </p:dataTable>
+                <p:button value="Neu" outcome="create_user"/>
+                <p:button value="Zurück" outcome="menu"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>

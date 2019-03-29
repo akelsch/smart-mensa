@@ -6,32 +6,39 @@
       xmlns:p="http://primefaces.org/ui">
 <h:body>
     <ui:composition template="template/template.xhtml">
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewAction action="#{loginView.checkIfLoggedIn}"/>
+                <f:viewAction action="#{loginView.checkIfAdmin}"/>
+            </f:metadata>
+        </ui:define>
         <ui:define name="title">Gerichte verwalten</ui:define>
         <ui:define name="main">
             <h1>Gerichte verwalten</h1>
-            <p:dataTable var="dish" value="#{manageDishesView.dishes}" selectionMode="single"
-                         selection="#{manageDishesView.selectedDish}" rowKey="#{dish.id}" style="max-width: 50%;">
-                <p:column headerText="Nummer">
-                    <h:outputText value="#{dish.id}"/>
-                </p:column>
-                <p:column headerText="Name">
-                    <h:outputText value="#{dish.name}"/>
-                </p:column>
-                <p:column headerText="Preis">
-                    <h:outputText value="#{dish.price}"/>
-                </p:column>
-                <p:column headerText="Kategorie">
-                    <h:outputText value="#{dish.category.value}"/>
-                </p:column>
-                <f:facet name="footer">
-                    <!-- TODO -->
-                    <p:commandButton value="Ändern"/>
-                    <p:commandButton value="Löschen"/>
-                </f:facet>
-            </p:dataTable>
-            <!-- TODO -->
-            <p:button value="Neu"/>
-            <p:button value="Zurück" outcome="menu"/>
+            <h:form>
+                <p:dataTable id="dataTable" var="dish" value="#{manageDishesView.dishes}" selectionMode="single"
+                             selection="#{manageDishesView.selectedDish}" rowKey="#{dish.id}" style="max-width: 800px">
+                    <p:column headerText="Nummer">
+                        <h:outputText value="#{dish.id}"/>
+                    </p:column>
+                    <p:column headerText="Name">
+                        <h:outputText value="#{dish.name}"/>
+                    </p:column>
+                    <p:column headerText="Preis">
+                        <h:outputText value="#{dish.price}"/>
+                    </p:column>
+                    <p:column headerText="Kategorie">
+                        <h:outputText value="#{dish.category.label}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Ändern" action="#{manageDishesView.changeSelectedDish}"/>
+                        <p:commandButton value="Löschen" action="#{manageDishesView.deleteSelectedDish}"
+                                         update="dataTable"/>
+                    </f:facet>
+                </p:dataTable>
+                <p:button value="Neu" outcome="create_dish"/>
+                <p:button value="Zurück" outcome="menu"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>
