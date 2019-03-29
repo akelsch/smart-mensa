@@ -31,7 +31,11 @@
 
                     <p:outputLabel for="email" value="Email:"/>
                     <p:inputText id="email" value="#{createUserView.email}" required="true"
-                                 requiredMessage="Bitte eine Email eingeben"/>
+                                 requiredMessage="Bitte eine Email eingeben"
+                                 validatorMessage="Die Email muss ein gültiges Format haben">
+                        <f:validateRegex pattern="\S+@\S+"/>
+                    </p:inputText>
+
                     <p:message for="email"/>
 
                     <p:outputLabel for="role" value="Rolle:"/>
@@ -48,7 +52,7 @@
                     <p:message for="password"/>
 
                     <!-- TODO Logik implementieren + Checkbox aktivieren, wenn Admin neues Passwort generiert -->
-                    <p:selectBooleanCheckbox value="" itemLabel="Passwort zurücksetzen"/>
+                    <p:selectBooleanCheckbox itemLabel="Passwort zurücksetzen"/>
                     <h:panelGroup/>
                     <h:panelGroup/>
 
