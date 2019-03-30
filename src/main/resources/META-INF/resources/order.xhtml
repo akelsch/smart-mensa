@@ -57,6 +57,7 @@
                                 <f:convertNumber locale="#{i18nBean.activeLocale}" type="currency" currencyCode="EUR"/>
                             </h:outputText>
                         </h:panelGrid>
+                        <p:button value="#{labels.buttonOrder}" outcome="delivery" rendered="#{not empty orderView.droppedDishes}"/>
                     </p:outputPanel>
                 </p:fieldset>
 
