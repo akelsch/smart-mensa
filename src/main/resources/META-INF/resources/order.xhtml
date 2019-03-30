@@ -51,7 +51,8 @@
                                 </h:outputText>
                             </p:column>
                             <p:column style="width:50px; text-align:center;">
-                                <p:commandButton icon="ui-icon ui-icon-close" action="#{orderView.deleteDroppedDish(dish)}"
+                                <p:commandButton icon="ui-icon ui-icon-close"
+                                                 action="#{orderView.deleteDroppedDish(dish)}"
                                                  update="@form"/>
                             </p:column>
                         </p:dataTable>
@@ -61,7 +62,8 @@
                                 <f:convertNumber type="currency" currencySymbol="€"/>
                             </h:outputText>
                         </h:panelGrid>
-                        <p:button value="#{labels.buttonOrder}" outcome="delivery" rendered="#{not empty orderView.droppedDishes}"/>
+                        <p:button value="#{labels.buttonOrder}" outcome="delivery"
+                                  rendered="#{not empty orderView.droppedDishes}"/>
                     </p:outputPanel>
                 </p:fieldset>
 

@@ -1,6 +1,7 @@
 package de.stl.saar.internetentw1.view;
 
 import de.stl.saar.internetentw1.model.Room;
+import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,6 @@ public class DeliveryView implements Serializable {
     private String name;
 
     public void order() {
-        System.out.println(room);
+        FacesContextUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu " + name + " in Raum " + room);
     }
 }
