@@ -53,7 +53,9 @@
                         </p:dataTable>
                         <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty orderView.droppedDishes}">
                             <h:outputLabel value="#{labels.labelSum}"/>
-                            <h:outputText value="#{orderView.sum}" />
+                            <h:outputText value="#{orderView.sum}">
+                                <f:convertNumber locale="#{i18nBean.activeLocale}" type="currency" currencyCode="EUR"/>
+                            </h:outputText>
                         </h:panelGrid>
                     </p:outputPanel>
                 </p:fieldset>
