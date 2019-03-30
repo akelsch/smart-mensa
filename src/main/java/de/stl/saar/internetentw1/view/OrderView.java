@@ -25,9 +25,6 @@ public class OrderView implements Serializable {
     @Setter
     private List<Dish> droppedDishes;
 
-    @Getter
-    private double sum;
-
     private final DishRepository dishRepository;
 
     @Inject
@@ -47,12 +44,16 @@ public class OrderView implements Serializable {
 
         droppedDishes.add(dish);
         dishes.remove(dish);
-        sum += dish.getPrice();
     }
 
     public void deleteDroppedDish(Dish dish) {
         droppedDishes.remove(dish);
         dishes.add(dish);
-        sum -= dish.getPrice();
+    }
+
+    public double getTotal() {
+        return droppedDishes.stream()
+                .mapToDouble(Dish::getPrice)
+                .sum();
     }
 }
