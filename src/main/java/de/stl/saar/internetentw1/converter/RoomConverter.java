@@ -10,10 +10,10 @@ import javax.faces.convert.FacesConverter;
 
 
 @FacesConverter(forClass = Room.class)
-public class RoomConverter implements Converter {
+public class RoomConverter implements Converter<Room> {
 
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+    public Room getAsObject(FacesContext context, UIComponent component, String value) {
         if (value.length() != 4) {
             FacesContextUtils.addErrorMessage(FacesContextUtils.getMessage("roomNumberError"), component);
             return null;
@@ -26,7 +26,7 @@ public class RoomConverter implements Converter {
     }
 
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
+    public String getAsString(FacesContext context, UIComponent component, Room value) {
         return value.toString();
     }
 }
