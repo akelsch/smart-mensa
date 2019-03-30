@@ -51,9 +51,8 @@
                                 </h:outputText>
                             </p:column>
                             <p:column style="width:50px; text-align:center;">
-                                <p:commandButton icon="ui-icon ui-icon-close"
-                                                 action="#{orderView.deleteDroppedDish(dish)}"
-                                                 update="@form"/>
+                                <p:commandButton action="#{orderView.deleteDroppedDish(dish)}" update="@form"
+                                                 icon="ui-icon ui-icon-close"/>
                             </p:column>
                         </p:dataTable>
                         <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty orderView.droppedDishes}">
@@ -72,6 +71,8 @@
                     <p:ajax listener="#{orderView.onDishDrop}" update="dropArea availableDishes"/>
                 </p:droppable>
             </h:form>
+            <br/>
+            <p:button value="#{labels.buttonBack}" outcome="menu"/>
         </ui:define>
     </ui:composition>
 </h:body>
