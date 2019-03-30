@@ -98,12 +98,14 @@ public final class FacesContextUtils {
     }
 
     public static void setLocale(Locale locale) {
-        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setLocale(locale);
     }
 
     public static String getMessage(String key) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ResourceBundle resourceBundle = facesContext.getApplication().getResourceBundle(facesContext, "msg");
+
         return resourceBundle.getString(key);
     }
 }

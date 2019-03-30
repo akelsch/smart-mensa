@@ -19,27 +19,25 @@ public class I18nBean implements Serializable {
 
     @Getter
     @Setter
-    private String localeCode;
+    private String activeLocale;
 
     @Getter
-    private Map<String, Locale> locales;
+    private Map<String, Locale> availableLocales;
 
     @PostConstruct
     public void init() {
-        locales = new LinkedHashMap<>();
-        locales.put("Deutsch", Locale.GERMAN);
-        locales.put("English", Locale.ENGLISH);
-        localeCode = Locale.GERMAN.getLanguage();
+        activeLocale = Locale.GERMAN.getLanguage();
+
+        availableLocales = new LinkedHashMap<>();
+        availableLocales.put("Deutsch", Locale.GERMAN);
+        availableLocales.put("English", Locale.ENGLISH);
     }
 
-    public void onLocaleCodeChange(ValueChangeEvent valueChangeEvent) {
-        String newLocaleValue = valueChangeEvent.getNewValue().toString();
+    public void onLocaleChange(ValueChangeEvent event) {
+        Locale newLocale = new Locale(event.getNewValue().toString());
 
-        for (Map.Entry<String, Locale> entry : locales.entrySet()) {
-
-            if (entry.getValue().getLanguage().equals(newLocaleValue)) {
-                FacesContextUtils.setLocale(entry.getValue());
-            }
+        if (availableLocales.containsValue(newLocale)) {
+            FacesContextUtils.setLocale(newLocale);
         }
     }
 }

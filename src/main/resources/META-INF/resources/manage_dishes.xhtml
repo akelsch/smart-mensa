@@ -31,7 +31,8 @@
                         <h:outputText value="#{dish.category.label}"/>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton value="#{labels.buttonChange}" action="#{manageDishesView.changeSelectedDish}"/>
+                        <p:commandButton value="#{labels.buttonChange}"
+                                         action="#{manageDishesView.changeSelectedDish}"/>
                         <p:commandButton value="#{labels.buttonDelete}" action="#{manageDishesView.deleteSelectedDish}"
                                          update="dataTable"/>
                     </f:facet>

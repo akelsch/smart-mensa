@@ -6,8 +6,9 @@
 <h:body>
     <h:form>
         <p:outputLabel value="#{labels.labelChooseLanguage}"/>
-        <p:selectOneMenu value="#{i18nBean.localeCode}" onchange="submit()" valueChangeListener="#{i18nBean.onLocaleCodeChange}">
-            <f:selectItems value="#{i18nBean.locales}" />
+        <p:selectOneMenu value="#{i18nBean.activeLocale}" valueChangeListener="#{i18nBean.onLocaleChange}"
+                         onchange="submit()">
+            <f:selectItems value="#{i18nBean.availableLocales}"/>
         </p:selectOneMenu>
     </h:form>
 </h:body>
