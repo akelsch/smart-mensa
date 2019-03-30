@@ -11,7 +11,6 @@ import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Optional;
 
@@ -56,19 +55,21 @@ public class LoginView implements Serializable {
         return "";
     }
 
-    public void checkIfLoggedIn() throws IOException {
+    public String checkIfLoggedIn() {
         if (user == null) {
-            FacesContextUtils.keepMessages();
             FacesContextUtils.addGlobalErrorMessage(FacesContextUtils.getMessage("sessionError"));
-            FacesContextUtils.redirectTo("index.xhtml");
+            return "index";
         }
+
+        return "";
     }
 
-    public void checkIfAdmin() throws IOException {
+    public String checkIfAdmin() {
         if (user.getRole() != Role.ADMIN) {
-            FacesContextUtils.keepMessages();
             FacesContextUtils.addGlobalInfoMessage(FacesContextUtils.getMessage("adminError"));
-            FacesContextUtils.redirectTo("menu.xhtml");
+            return "menu";
         }
+
+        return "";
     }
 }

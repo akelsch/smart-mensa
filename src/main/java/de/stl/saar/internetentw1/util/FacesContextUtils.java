@@ -5,7 +5,6 @@ import lombok.experimental.UtilityClass;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -76,25 +75,6 @@ public final class FacesContextUtils {
         }
 
         return Optional.empty();
-    }
-
-    /**
-     * Bewahrt {@link FacesMessage} nach Redirects auf.
-     */
-    public static void keepMessages() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().getFlash().setKeepMessages(true);
-    }
-
-    /**
-     * Startet einen Redirect zu der angegebenen Seite.
-     *
-     * @param destination Die Ziel XHTML des Redirects
-     * @throws IOException wenn der Redirect fehlschlägt
-     */
-    public static void redirectTo(String destination) throws IOException {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect(destination);
     }
 
     /**
