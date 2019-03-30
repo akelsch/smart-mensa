@@ -11,8 +11,7 @@
                 <f:viewAction action="#{loginView.checkIfLoggedIn}"/>
             </f:metadata>
         </ui:define>
-        <ui:define name="title">#{labels.labelCarte}</ui:define>
-        <ui:define name="javascript">
+        <ui:define name="js">
             <script type="text/javascript">
                 function handleDrop(event, ui) {
                     var droppedDish = ui.draggable;
@@ -20,6 +19,7 @@
                 }
             </script>
         </ui:define>
+        <ui:define name="title">#{labels.labelCarte}</ui:define>
         <ui:define name="main">
             <h1>#{labels.labelCarte}</h1>
             <h:form styleClass="ui-g">
@@ -27,7 +27,7 @@
                     <p:dataGrid id="availableDishes" var="dish" value="#{orderView.dishes}" columns="3">
                         <p:panel id="pnl" header="#{dish.name}" style="text-align:center;">
                             <h:panelGrid columns="1" style="width:100%;">
-                                <p:graphicImage name="/images/#{dish.image}.jpg" height="100px"/>
+                                <p:graphicImage name="/images/#{dish.image}.jpg" alt="#{dish.name}" height="100px"/>
                                 <h:outputText value="#{dish.price}">
                                     <f:convertNumber type="currency" currencySymbol="€"/>
                                 </h:outputText>
