@@ -11,7 +11,7 @@
                 <f:viewAction action="#{loginView.checkIfLoggedIn}"/>
             </f:metadata>
         </ui:define>
-        <ui:define name="title">Speisekarte</ui:define>
+        <ui:define name="title">#{labels.labelCarte}</ui:define>
         <ui:define name="javascript">
             <script type="text/javascript">
                 function handleDrop(event, ui) {
@@ -21,9 +21,9 @@
             </script>
         </ui:define>
         <ui:define name="main">
-            <h1>Speisekarte</h1>
+            <h1>#{labels.labelCarte}</h1>
             <h:form styleClass="ui-g">
-                <p:fieldset id="availableDishesField" legend="Verfügbare Gerichte" styleClass="ui-g-6">
+                <p:fieldset id="availableDishesField" legend="#{labels.labelAvailableDishes}" styleClass="ui-g-6">
                     <p:dataGrid id="availableDishes" var="dish" value="#{orderView.dishes}" columns="3">
                         <p:panel id="pnl" header="#{dish.name}" style="text-align:center;">
                             <h:panelGrid columns="1" style="width:100%;">
@@ -37,9 +37,9 @@
                     </p:dataGrid>
                 </p:fieldset>
 
-                <p:fieldset id="selectedDishes" legend="Ausgewählte Gerichte" styleClass="ui-g-4">
+                <p:fieldset id="selectedDishes" legend="#{labels.labelSelectedDishes}" styleClass="ui-g-4">
                     <p:outputPanel id="dropArea">
-                        <h:outputText value="Gericht hier ablegen" rendered="#{empty orderView.droppedDishes}"/>
+                        <h:outputText value="#{labels.labelDishDropArea}" rendered="#{empty orderView.droppedDishes}"/>
                         <p:dataTable id="selectedDishesTable" var="dish" value="#{orderView.droppedDishes}"
                                      rendered="#{not empty orderView.droppedDishes}">
                             <p:column headerText="#{labels.labelName}">
