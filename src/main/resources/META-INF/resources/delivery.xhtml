@@ -19,10 +19,11 @@
 
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <p:outputLabel for="room" value="#{labels.labelRoomNumber}"/>
-                    <p:inputText id="room" value="#{deliveryView.room}" required="true"
-                                 requiredMessage="#{msg.roomNumberRequired}" disabled="#{deliveryView.disabled}">
+                    <p:inputNumber id="room" value="#{deliveryView.room}" required="true"
+                                   requiredMessage="#{msg.roomNumberRequired}" disabled="#{deliveryView.disabled}"
+                                   thousandSeparator="" decimalPlaces="0">
                         <f:validator validatorId="roomValidator"/>
-                    </p:inputText>
+                    </p:inputNumber>
                     <p:message for="room"/>
 
                     <p:outputLabel for="name" value="#{labels.labelName}"/>
