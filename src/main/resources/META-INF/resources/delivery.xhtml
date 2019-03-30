@@ -29,7 +29,7 @@
                     <p:message for="name"/>
                 </h:panelGrid>
 
-                <p:commandButton value="#{labels.buttonOrder}"/>
+                <p:commandButton value="#{labels.buttonOrder}" action="#{deliveryView.order}" update="grid"/>
                 <p:button value="#{labels.buttonCancel}" outcome="order"/>
             </h:form>
         </ui:define>

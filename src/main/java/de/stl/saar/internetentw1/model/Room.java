@@ -13,6 +13,6 @@ public class Room {
 
     @Override
     public String toString() {
-        return String.valueOf(building) + floor + room;
+        return String.format("%d%d%02d", building, floor, room);
     }
 }
