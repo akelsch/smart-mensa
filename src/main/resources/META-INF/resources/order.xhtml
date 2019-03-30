@@ -22,20 +22,22 @@
         </ui:define>
         <ui:define name="main">
             <h1>Speisekarte</h1>
-            <h:form>
-                <p:fieldset id="availableDishesField" legend="Verfügbare Gerichte" style="width: 800px;">
+            <h:form styleClass="ui-g">
+                <p:fieldset id="availableDishesField" legend="Verfügbare Gerichte" styleClass="ui-g-6">
                     <p:dataGrid id="availableDishes" var="dish" value="#{orderView.dishes}" columns="3">
                         <p:panel id="pnl" header="#{dish.name}" style="text-align:center;">
                             <h:panelGrid columns="1" style="width:100%;">
                                 <p:graphicImage name="/images/#{dish.image}.jpg" height="100px"/>
-                                <h:outputText value="#{dish.price}"/>
+                                <h:outputText value="#{dish.price}">
+                                    <f:convertNumber type="currency" currencySymbol="€"/>
+                                </h:outputText>
                             </h:panelGrid>
                         </p:panel>
                         <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
                     </p:dataGrid>
                 </p:fieldset>
 
-                <p:fieldset id="selectedDishes" legend="Ausgewählte Gerichte" style="width: 800px; margin-top:20px;">
+                <p:fieldset id="selectedDishes" legend="Ausgewählte Gerichte" styleClass="ui-g-4">
                     <p:outputPanel id="dropArea">
                         <h:outputText value="Gericht hier ablegen" rendered="#{empty orderView.droppedDishes}"/>
                         <p:dataTable id="selectedDishesTable" var="dish" value="#{orderView.droppedDishes}"
@@ -44,7 +46,9 @@
                                 <h:outputText value="#{dish.name}"/>
                             </p:column>
                             <p:column headerText="#{labels.labelPrice}">
-                                <h:outputText value="#{dish.price}"/>
+                                <h:outputText value="#{dish.price}">
+                                    <f:convertNumber type="currency" currencySymbol="€"/>
+                                </h:outputText>
                             </p:column>
                             <p:column style="width:50px; text-align:center;">
                                 <p:commandButton icon="ui-icon ui-icon-close" action="#{orderView.deleteDroppedDish(dish)}"
@@ -54,7 +58,7 @@
                         <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty orderView.droppedDishes}">
                             <h:outputLabel value="#{labels.labelSum}"/>
                             <h:outputText value="#{orderView.sum}">
-                                <f:convertNumber locale="#{i18nBean.activeLocale}" type="currency" currencyCode="EUR"/>
+                                <f:convertNumber type="currency" currencySymbol="€"/>
                             </h:outputText>
                         </h:panelGrid>
                         <p:button value="#{labels.buttonOrder}" outcome="delivery" rendered="#{not empty orderView.droppedDishes}"/>
