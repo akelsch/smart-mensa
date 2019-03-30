@@ -26,13 +26,17 @@ public class I18nBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        activeLocale = Locale.GERMAN.getLanguage();
-
+        activeLocale = FacesContextUtils.getDefaultLocale().getLanguage();
         availableLocales = new LinkedHashMap<>();
         availableLocales.put("Deutsch", Locale.GERMAN);
         availableLocales.put("English", Locale.ENGLISH);
     }
 
+    /**
+     * Ändert die Sprache der JSF View bei Änderung im XHTML.
+     *
+     * @param event Das Event, dass beim Ändern der Sprache ausgelöst wird
+     */
     public void onLocaleChange(ValueChangeEvent event) {
         Locale newLocale = new Locale(event.getNewValue().toString());
 

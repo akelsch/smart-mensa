@@ -97,11 +97,33 @@ public final class FacesContextUtils {
         facesContext.getExternalContext().redirect(destination);
     }
 
+    /**
+     * Liefert {@code default-locale} aus {@code faces-config.xml}.
+     *
+     * @return Die Standardsprache als {@link Locale}
+     */
+    public static Locale getDefaultLocale() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        return facesContext.getApplication().getDefaultLocale();
+    }
+
+    /**
+     * Setzt die JSF View Sprache auf die angegebene {@link Locale}.
+     *
+     * @param locale Die neue Sprache
+     */
     public static void setLocale(Locale locale) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getViewRoot().setLocale(locale);
     }
 
+    /**
+     * Liefert den Wert für das Property mit dem Schlüssel {@code key} aus dem
+     * Resource Bundle {@code msg}.
+     *
+     * @param key Der Schlüssel für den gesuchten Wert
+     * @return Der Wert des gesuchten Properties
+     */
     public static String getMessage(String key) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ResourceBundle resourceBundle = facesContext.getApplication().getResourceBundle(facesContext, "msg");
