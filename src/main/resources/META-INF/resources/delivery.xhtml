@@ -15,24 +15,25 @@
         <ui:define name="main">
             <h1>#{labels.labelDelivery}</h1>
             <h:form>
-                <p:growl id="growl" showDetail="true" sticky="true"/>
+                <p:growl id="growl" globalOnly="true" showDetail="true" sticky="true"/>
 
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <p:outputLabel for="room" value="#{labels.labelRoomNumber}"/>
                     <p:inputText id="room" value="#{deliveryView.room}" required="true"
-                                 requiredMessage="#{msg.roomNumberRequired}">
+                                 requiredMessage="#{msg.roomNumberRequired}" disabled="#{deliveryView.disabled}">
                         <f:validator validatorId="roomValidator"/>
                     </p:inputText>
                     <p:message for="room"/>
 
                     <p:outputLabel for="name" value="#{labels.labelName}"/>
                     <p:inputText id="name" value="#{deliveryView.name}" required="true"
-                                 requiredMessage="#{msg.nameRequired}"/>
+                                 requiredMessage="#{msg.nameRequired}" disabled="#{deliveryView.disabled}"/>
                     <p:message for="name"/>
                 </h:panelGrid>
 
-                <p:commandButton value="#{labels.buttonOrder}" action="#{deliveryView.order}" update="@form"/>
-                <p:button value="#{labels.buttonCancel}" outcome="order"/>
+                <p:commandButton value="#{labels.buttonOrder}" action="#{deliveryView.order}" update="@form"
+                                 disabled="#{deliveryView.disabled}"/>
+                <p:button value="#{labels.buttonBack}" outcome="menu"/>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -3,7 +3,6 @@ package de.stl.saar.internetentw1.util;
 import lombok.experimental.UtilityClass;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import java.util.Locale;
@@ -25,12 +24,6 @@ public final class FacesContextUtils {
     public static void addGlobalErrorMessage(String message) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", message));
-    }
-
-    public static void addErrorMessage(String message, UIComponent component) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.addMessage(component.getClientId(),
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", message));
     }
 
     /**

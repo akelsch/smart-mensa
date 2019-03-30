@@ -21,7 +21,11 @@ public class DeliveryView implements Serializable {
     @Setter
     private String name;
 
+    @Getter
+    private boolean isDisabled = false;
+
     public void order() {
+        isDisabled = true;
         FacesContextUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu Raum " + room);
     }
 }

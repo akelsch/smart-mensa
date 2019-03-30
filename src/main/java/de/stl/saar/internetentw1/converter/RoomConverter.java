@@ -4,19 +4,20 @@ import de.stl.saar.internetentw1.model.Room;
 import de.stl.saar.internetentw1.util.FacesContextUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 @FacesConverter(forClass = Room.class)
 public class RoomConverter implements Converter<Room> {
 
     @Override
-    public Room getAsObject(FacesContext context, UIComponent component, String value) {
+    public Room getAsObject(FacesContext context, UIComponent component, String value) throws ConverterException {
         if (value.length() != 4 || !StringUtils.isNumeric(value)) {
-            FacesContextUtils.addErrorMessage(FacesContextUtils.getMessage("roomNumberError"), component);
-            return null;
+            throw new ConverterException(new FacesMessage(FacesContextUtils.getMessage("roomNumberError")));
         }
 
         return new Room(value);
