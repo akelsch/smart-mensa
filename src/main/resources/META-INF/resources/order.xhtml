@@ -50,8 +50,11 @@
                                 <p:commandButton icon="ui-icon ui-icon-close" action="#{orderView.deleteDroppedDish(dish)}"
                                                  update="@form"/>
                             </p:column>
-                            <!-- TODO Summe berechnen -->
                         </p:dataTable>
+                        <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty orderView.droppedDishes}">
+                            <h:outputLabel value="#{labels.labelSum}"/>
+                            <h:outputText value="#{orderView.sum}" />
+                        </h:panelGrid>
                     </p:outputPanel>
                 </p:fieldset>
 
