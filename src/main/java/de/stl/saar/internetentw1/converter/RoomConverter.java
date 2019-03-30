@@ -2,27 +2,24 @@ package de.stl.saar.internetentw1.converter;
 
 import de.stl.saar.internetentw1.model.Room;
 import de.stl.saar.internetentw1.util.FacesContextUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
 @FacesConverter(forClass = Room.class)
 public class RoomConverter implements Converter<Room> {
 
     @Override
     public Room getAsObject(FacesContext context, UIComponent component, String value) {
-        if (value.length() != 4) {
+        if (value.length() != 4 || !StringUtils.isNumeric(value)) {
             FacesContextUtils.addErrorMessage(FacesContextUtils.getMessage("roomNumberError"), component);
             return null;
         }
-        Room room = new Room();
-        room.setBuilding(Integer.parseInt(value.substring(0, 1)));
-        room.setFloor(Integer.parseInt(value.substring(1, 2)));
-        room.setRoom(Integer.parseInt(value.substring(2, 4)));
-        return room;
+
+        return new Room(value);
     }
 
     @Override
