@@ -51,7 +51,7 @@ public class LoginView implements Serializable {
             return "menu?faces-redirect=true";
         }
 
-        FacesContextUtils.addGlobalErrorMessage("Authentifizierung fehlgeschlagen!");
+        FacesContextUtils.addGlobalErrorMessage(FacesContextUtils.getMessage("authenticationError"));
 
         return "";
     }
@@ -59,7 +59,7 @@ public class LoginView implements Serializable {
     public void checkIfLoggedIn() throws IOException {
         if (user == null) {
             FacesContextUtils.keepMessages();
-            FacesContextUtils.addGlobalErrorMessage("Nicht eingeloggt oder Session abgelaufen!");
+            FacesContextUtils.addGlobalErrorMessage(FacesContextUtils.getMessage("sessionError"));
             FacesContextUtils.redirectTo("index.xhtml");
         }
     }
@@ -67,7 +67,7 @@ public class LoginView implements Serializable {
     public void checkIfAdmin() throws IOException {
         if (user.getRole() != Role.ADMIN) {
             FacesContextUtils.keepMessages();
-            FacesContextUtils.addGlobalInfoMessage("Dieser Bereich ist nur für Admins ;)");
+            FacesContextUtils.addGlobalInfoMessage(FacesContextUtils.getMessage("adminError"));
             FacesContextUtils.redirectTo("menu.xhtml");
         }
     }

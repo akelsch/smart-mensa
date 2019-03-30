@@ -12,23 +12,28 @@
                 <f:viewAction action="#{loginView.checkIfLoggedIn}"/>
             </f:metadata>
         </ui:define>
-        <ui:define name="title">Hauptmenü</ui:define>
+        <ui:define name="title">#{labels.labelMenu}</ui:define>
         <ui:define name="main">
-            <h1>Hauptmenü</h1>
+            <h1 class="mb-0">#{labels.labelMenu}</h1>
 
             <p:tooltip/>
             <h:panelGrid columns="3" cellpadding="5">
                 <p:messages globalOnly="true" showDetail="true" closable="true"/>
             </h:panelGrid>
 
-            <h:outputText value="Hallo, #{loginView.user.username}!"/><br/>
-            <c:if test="#{loginView.user.role == 'ADMIN'}">
-                <h:link value="Zur Verwaltung der Gerichte" outcome="manage_dishes"/><br/>
-                <h:link value="Zur Benutzerverwaltung" outcome="manage_users"/><br/>
-            </c:if>
-            <h:link value="Eigenes Profil ändern"/><br/>
-            <h:link value="Zur Bestellung"/><br/>
-            <h:link value="Ausloggen" outcome="index"/>
+            <h:outputFormat value="#{msg.greeting}">
+                <f:param value="#{loginView.user.username}"/>
+            </h:outputFormat>
+
+            <ul style="list-style: none; padding-left: 20px;">
+                <c:if test="#{loginView.user.role == 'ADMIN'}">
+                    <li><h:link value="#{labels.labelManageDishes}" outcome="manage_dishes"/></li>
+                    <li><h:link value="#{labels.labelManageUsers}" outcome="manage_users"/></li>
+                </c:if>
+                <li><h:link value="#{labels.labelChangeProfile}"/></li>
+                <li><h:link value="#{labels.labelOrder}"/></li>
+                <li><h:link value="#{labels.labelLogOut}" outcome="index"/></li>
+            </ul>
         </ui:define>
     </ui:composition>
 </h:body>

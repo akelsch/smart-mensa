@@ -67,7 +67,6 @@ public class CreateUserView implements Serializable {
         return Role.values();
     }
 
-
     /**
      * Generiert ein zufälliges Passwort der Länge 10 bestehend aus den Zeichen
      * a-z, A-Z und 0-9.
