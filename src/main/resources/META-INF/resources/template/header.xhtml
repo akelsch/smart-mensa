@@ -5,11 +5,13 @@
       xmlns:p="http://primefaces.org/ui">
 <h:body>
     <h:form>
-        <p:outputLabel value="#{labels.labelChooseLanguage}"/>
-        <p:selectOneMenu value="#{i18nBean.activeLocale}" valueChangeListener="#{i18nBean.onLocaleChange}"
-                         onchange="submit()">
-            <f:selectItems value="#{i18nBean.availableLocales}"/>
-        </p:selectOneMenu>
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel value="#{labels.labelChooseLanguage}"/>
+            <p:selectOneMenu value="#{i18nBean.activeLocale}" valueChangeListener="#{i18nBean.onLocaleChange}"
+                             onchange="submit()">
+                <f:selectItems value="#{i18nBean.availableLocales}"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
     </h:form>
 </h:body>
 </html>
