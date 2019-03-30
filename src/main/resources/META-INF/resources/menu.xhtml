@@ -24,14 +24,16 @@
             <h:outputFormat value="#{msg.greeting}">
                 <f:param value="#{loginView.user.username}"/>
             </h:outputFormat>
-            <br/>
-            <c:if test="#{loginView.user.role == 'ADMIN'}">
-                <h:link value="#{labels.labelManageDishes}" outcome="manage_dishes"/><br/>
-                <h:link value="#{labels.labelManageUsers}" outcome="manage_users"/><br/>
-            </c:if>
-            <h:link value="#{labels.labelChangeProfile}"/><br/>
-            <h:link value="#{labels.labelOrder}"/><br/>
-            <h:link value="#{labels.labelLogOut}" outcome="index"/>
+
+            <ul style="list-style: none; padding-left: 20px;">
+                <c:if test="#{loginView.user.role == 'ADMIN'}">
+                    <li><h:link value="#{labels.labelManageDishes}" outcome="manage_dishes"/></li>
+                    <li><h:link value="#{labels.labelManageUsers}" outcome="manage_users"/></li>
+                </c:if>
+                <li><h:link value="#{labels.labelChangeProfile}"/></li>
+                <li><h:link value="#{labels.labelOrder}"/></li>
+                <li><h:link value="#{labels.labelLogOut}" outcome="index"/></li>
+            </ul>
         </ui:define>
     </ui:composition>
 </h:body>
