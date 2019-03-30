@@ -47,8 +47,8 @@
                                 <h:outputText value="#{dish.price}"/>
                             </p:column>
                             <p:column style="width:50px; text-align:center;">
-                                <!-- TODO Löschen implementieren -->
-                                <p:commandButton icon="ui-icon ui-icon-close"/>
+                                <p:commandButton icon="ui-icon ui-icon-close" action="#{orderView.deleteDroppedDish(dish)}"
+                                                 update="@form"/>
                             </p:column>
                             <!-- TODO Summe berechnen -->
                         </p:dataTable>

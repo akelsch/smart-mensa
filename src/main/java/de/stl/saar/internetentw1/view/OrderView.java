@@ -45,4 +45,9 @@ public class OrderView implements Serializable {
         droppedDishes.add(dish);
         dishes.remove(dish);
     }
+
+    public void deleteDroppedDish(Dish dish) {
+        droppedDishes.remove(dish);
+        dishes.add(dish);
+    }
 }
