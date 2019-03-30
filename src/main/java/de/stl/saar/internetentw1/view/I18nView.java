@@ -15,7 +15,7 @@ import java.util.Map;
 
 @ManagedBean
 @SessionScoped
-public class I18nBean implements Serializable {
+public class I18nView implements Serializable {
 
     @Getter
     @Setter

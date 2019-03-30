@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 
@@ -22,7 +23,12 @@ public class DeliveryView implements Serializable {
     private String name;
 
     @Getter
-    private boolean isDisabled = false;
+    private boolean isDisabled;
+
+    @PostConstruct
+    public void init() {
+        isDisabled = false;
+    }
 
     public void order() {
         isDisabled = true;
