@@ -55,7 +55,7 @@ public class SmartMensaApplication {
             Dish dish7 = new Dish("Rumänischer Salat", 3.5, Category.SALAD, "rumaenischerSalat");
             Dish dish8 = new Dish("Einfach nur Salat", 3.5, Category.SALAD, "salat");
             Dish dish9 = new Dish("Wiener Schnitzel", 7.0, Category.MAIN_DISH, "schnitzel");
-            Dish dish10 = new Dish("Tomate-Mozarella", 4.0, Category.SALAD, "tomateMozarella");
+            Dish dish10 = new Dish("Tomate-Mozzarella", 4.0, Category.SALAD, "tomateMozzarella");
 
             userRepository.saveAll(asList(user1, user2, user3));
             dishRepository.saveAll(asList(dish1, dish2, dish3, dish4, dish5, dish6, dish7, dish8, dish9, dish10));
