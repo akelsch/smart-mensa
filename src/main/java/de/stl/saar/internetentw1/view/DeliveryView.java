@@ -22,6 +22,6 @@ public class DeliveryView implements Serializable {
     private String name;
 
     public void order() {
-        FacesContextUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu " + name + " in Raum " + room);
+        FacesContextUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu Raum " + room);
     }
 }
