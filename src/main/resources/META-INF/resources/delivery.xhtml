@@ -20,7 +20,9 @@
 
                     <p:outputLabel for="room" value="#{labels.labelRoomNumber}"/>
                     <p:inputText id="room" value="#{deliveryView.room}" required="true"
-                                 requiredMessage="#{msg.roomNumberRequired}"/>
+                                 requiredMessage="#{msg.roomNumberRequired}">
+                            <f:validator validatorId="roomValidator"/>
+                    </p:inputText>
                     <p:message for="room"/>
 
                     <p:outputLabel for="name" value="#{labels.labelName}"/>
