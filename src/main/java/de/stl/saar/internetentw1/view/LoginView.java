@@ -4,7 +4,6 @@ import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
 import de.stl.saar.internetentw1.util.FacesMessageUtils;
-import de.stl.saar.internetentw1.util.FlashUtils;
 import de.stl.saar.internetentw1.util.ResourceBundleUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,7 +57,6 @@ public class LoginView implements Serializable {
 
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             this.user = user.get();
-            FlashUtils.putObject("user", this.user);
             return "menu?faces-redirect=true";
         }
 

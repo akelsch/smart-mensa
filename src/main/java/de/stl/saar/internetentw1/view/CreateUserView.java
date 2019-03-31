@@ -58,8 +58,8 @@ public class CreateUserView implements Serializable {
             email = u.getEmail();
             role = u.getRole();
         });
-        Optional<Boolean> isOwnProfile = FlashUtils.getObject("isOwnProfile", Boolean.class);
-        isOwnProfile.ifPresent(b -> this.isOwnProfile = b);
+
+        isOwnProfile = FlashUtils.getObject("isOwnProfile", Boolean.class).orElse(false);
     }
 
     /**
@@ -92,7 +92,7 @@ public class CreateUserView implements Serializable {
         User user = new User(username, password, email, role);
         userRepository.save(user.withId(id));
 
-        if(isOwnProfile) {
+        if (isOwnProfile) {
             return "menu?faces-redirect=true";
         }
         return "manage_users?faces-redirect=true";

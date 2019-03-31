@@ -52,7 +52,8 @@
                     <p:message for="password"/>
 
                     <!-- FIXME Logik implementieren + Checkbox aktivieren, wenn Admin neues Passwort generiert -->
-                    <p:selectBooleanCheckbox itemLabel="#{labels.labelResetPassword}" rendered="#{!createUserView.ownProfile}"/>
+                    <p:selectBooleanCheckbox itemLabel="#{labels.labelResetPassword}"
+                                             rendered="#{!createUserView.ownProfile}"/>
                     <h:panelGroup/>
                     <h:panelGroup/>
 
@@ -65,7 +66,8 @@
                 </h:panelGrid>
 
                 <p:commandButton value="#{labels.buttonSave}" action="#{createUserView.saveUser}" update="grid"/>
-                <p:button value="#{labels.buttonCancel}" outcome="manage_users" rendered="#{!createUserView.ownProfile}"/>
+                <p:button value="#{labels.buttonCancel}" outcome="manage_users"
+                          rendered="#{!createUserView.ownProfile}"/>
                 <p:button value="#{labels.buttonCancel}" outcome="menu" rendered="#{createUserView.ownProfile}"/>
             </h:form>
         </ui:define>

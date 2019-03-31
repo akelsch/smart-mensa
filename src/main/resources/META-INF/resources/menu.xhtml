@@ -22,7 +22,7 @@
             </h:panelGrid>
 
             <h:outputFormat value="#{msg.greeting}">
-                <f:param value="#{menuView.user.username}"/>
+                <f:param value="#{loginView.user.username}"/>
             </h:outputFormat>
 
             <ul class="menu-list">
@@ -30,8 +30,8 @@
                     <li><p:link value="#{labels.labelManageDishes}" outcome="manage_dishes"/></li>
                     <li><p:link value="#{labels.labelManageUsers}" outcome="manage_users"/></li>
                 </c:if>
-                <!-- TODO Eigenes Profil ändern implementieren-->
-                <li><p:commandLink value="#{labels.labelChangeProfile}" action="#{menuView.changeOwnProfile}"/></li>
+                <li><p:commandLink value="#{labels.labelChangeProfile}"
+                                   action="#{menuView.changeOwnProfile(loginView.user)}"/></li>
                 <li><p:link value="#{labels.labelOrder}" outcome="order"/></li>
                 <li><p:link value="#{labels.labelLogOut}" outcome="index"/></li>
             </ul>
