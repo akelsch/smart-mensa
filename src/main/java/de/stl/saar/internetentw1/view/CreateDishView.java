@@ -33,6 +33,8 @@ public class CreateDishView implements Serializable {
     @Setter
     private Category category;
 
+    private String image;
+
     private final DishRepository dishRepository;
 
     @Inject
@@ -48,6 +50,7 @@ public class CreateDishView implements Serializable {
             name = d.getName();
             price = d.getPrice();
             category = d.getCategory();
+            image = d.getImage();
         });
     }
 
@@ -70,8 +73,8 @@ public class CreateDishView implements Serializable {
      * @return Ein Redirect zurück auf die tabellarische Übersicht der Gerichte
      */
     public String saveDish() {
-        Dish dish = new Dish(name, price, category);
-        dishRepository.save(dish.withId(id));
+        Dish dish = new Dish(id, name, price, category, image);
+        dishRepository.save(dish);
 
         return "manage_dishes?faces-redirect=true";
     }

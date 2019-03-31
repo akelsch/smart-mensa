@@ -44,6 +44,14 @@
                                        itemValue="#{category}" itemLabel="#{category.label}"/>
                     </p:selectOneListbox>
                     <p:message for="category"/>
+
+                    <!-- Wo sollen die Bilder gespeichert werden? -->
+                    <!-- Wie soll man die unterschiedlichen Pfade unterscheiden? -->
+                    <!--<p:outputLabel for="image" value="Bild"/>
+                    <p:fileUpload id="image" fileUploadListener="#{createDishView.handleFileUpload}" mode="advanced"
+                                  dragDropSupport="true" update="messages" sizeLimit="100000"
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                    <p:message for="image"/>-->
                 </h:panelGrid>
 
                 <p:commandButton value="#{labels.buttonSave}" action="#{createDishView.saveDish}" update="grid"/>
