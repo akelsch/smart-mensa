@@ -40,26 +40,45 @@ public class OrderView implements Serializable {
         dishRepository.findAll().forEach(dishes::add);
     }
 
-    public void onDishDrop(DragDropEvent event) {
-        Dish dish = (Dish) event.getData();
-
-        droppedDishes.add(dish);
-        dishes.remove(dish);
-    }
-
+    /**
+     * Löscht ein Gericht aus der Auswahlliste und fügt es wieder dem Grid hinzu.
+     *
+     * @param dish Das Gericht, das gelöscht werden soll
+     */
     public void deleteDroppedDish(Dish dish) {
         droppedDishes.remove(dish);
         dishes.add(dish);
     }
 
+    /**
+     * Berechnet die Summe der Preise aller ausgewählten Gerichte.
+     *
+     * @return Die Summe der Preise aller ausgewählten Gerichte
+     */
     public double getTotal() {
         return droppedDishes.stream()
                 .mapToDouble(Dish::getPrice)
                 .sum();
     }
 
+    /**
+     * Leitet den Benutzer weiter zur Lieferdaten Seite und gibt dieser die
+     * Liste der ausgewählten Gerichte mit.
+     *
+     * @return Ein Redirect auf {@code delivery.xhtml}
+     */
     public String proceedToDelivery() {
         FlashUtils.putObject("orderedDishes", droppedDishes);
         return "delivery?faces-redirect=true";
+    }
+
+    /**
+     * Fügt ein Gericht der Auswahlliste hinzu und entfernt es aus dem Grid.
+     */
+    public void onDishDrop(DragDropEvent event) {
+        Dish dish = (Dish) event.getData();
+
+        droppedDishes.add(dish);
+        dishes.remove(dish);
     }
 }

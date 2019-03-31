@@ -36,12 +36,23 @@ public class DeliveryView implements Serializable {
         orderedDishes = FlashUtils.getList("orderedDishes", Dish.class);
     }
 
-    public void order() {
-        isDisabled = true;
-        FacesMessageUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu Raum " + room);
-    }
-
+    /**
+     * Überprüft, ob der Benutzer vorher eine Bestellung getätigt hat. Falls er
+     * das nicht getan hat, wird er zurück zur Speisekarte weitergeleitet.
+     *
+     * @return Eine Weiterleitung zu {@code order.xhtml} oder nichts
+     */
     public String checkIfHasOrdered() {
         return orderedDishes.isEmpty() ? "order" : "";
+    }
+
+    /**
+     * Schaltet die Felder des Lieferdaten Formulars ab und informiert den Benutzer
+     * mit einer Meldung über die erfolgreiche Bestellung.
+     */
+    public void order() {
+        isDisabled = true;
+        // TODO i18n
+        FacesMessageUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu Raum " + room);
     }
 }

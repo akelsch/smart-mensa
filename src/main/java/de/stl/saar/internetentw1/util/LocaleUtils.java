@@ -22,7 +22,7 @@ public final class LocaleUtils {
     }
 
     /**
-     * Setzt die JSF View Sprache auf die angegebene {@link Locale}.
+     * Setzt die JSF-View Sprache auf die angegebene {@link Locale}.
      *
      * @param locale Die neue Sprache
      */

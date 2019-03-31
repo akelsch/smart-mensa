@@ -10,6 +10,11 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+/**
+ * Converter, der einen String zu einem {@link Room} konvertiert.
+ * <p>
+ * Der Converter setzt einen als Integer parsbaren String der Länge Vier voraus.
+ */
 @FacesConverter(forClass = Room.class)
 public class RoomConverter implements Converter<Room> {
 

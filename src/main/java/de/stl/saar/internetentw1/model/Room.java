@@ -16,10 +16,12 @@ public class Room {
 
     /**
      * Konstruiert ein {@link Room} Objekt mit Hilfe eines Strings. Es wird
-     * vorausgesetzt, dass der String numerisch ist und die Länge vier besitzt.
+     * vorausgesetzt, dass der String numerisch ist und die Länge Vier besitzt.
      * <p>
-     * Die erste Zeichen steht für das Gebäude, das zweite für die Etage und
+     * Das erste Zeichen steht für das Gebäude, das zweite für die Etage und
      * die letzten zwei Zeichen stehen für die Nummer des Raums.
+     * <p>
+     * Dieser Konstruktor ist quasi die Umkehrfunktion zur toString-Methode.
      *
      * @param s Der Raum als String
      */

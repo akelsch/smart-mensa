@@ -10,7 +10,6 @@ import lombok.Setter;
 
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Optional;
@@ -37,12 +36,22 @@ public class LoginView implements Serializable {
         this.userRepository = userRepository;
     }
 
-    public void clearForm(ComponentSystemEvent event) {
+    /**
+     * Löscht beim Laden der Seite alle Login-Formular Felder und loggt den
+     * Benutzer wieder aus.
+     */
+    public void onload() {
         username = "";
         password = "";
         user = null;
     }
 
+    /**
+     * Loggt einen Benutzer ein, falls er in der Datenbank existiert und das
+     * Passwort mit dem im Formular eingegebenen Passwort übereinstimmt.
+     *
+     * @return Eine Weiterleitung ins Hauptmenü oder eine Fehlermeldung
+     */
     public String login() {
         Optional<User> user = userRepository.findByUsername(username);
 
@@ -56,6 +65,12 @@ public class LoginView implements Serializable {
         return "";
     }
 
+    /**
+     * Überprüft, ob der Benutzer eingeloggt ist. Falls nicht, wird er auf die
+     * Startseite weitergeleitet und erhält dort eine Fehlermeldung.
+     *
+     * @return Eine Weiterleitung zu {@code index.xhtml} oder nichts
+     */
     public String checkIfLoggedIn() {
         if (user == null) {
             FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("sessionError"));
@@ -65,6 +80,12 @@ public class LoginView implements Serializable {
         return "";
     }
 
+    /**
+     * Überprüft, ob ein eingeloggter Benutzer ein Administrator ist. Falls nicht,
+     * wird er ins Hauptmenü weitergeleitet und erhält dort eine Fehlermeldung.
+     *
+     * @return Eine Weiterleitung zu {@code menu.xhtml} oder nichts
+     */
     public String checkIfAdmin() {
         if (user.getRole() != Role.ADMIN) {
             FacesMessageUtils.addGlobalInfoMessage(ResourceBundleUtils.getMessage("adminError"));

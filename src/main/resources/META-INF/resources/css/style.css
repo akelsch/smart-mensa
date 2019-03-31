@@ -9,3 +9,9 @@ footer {
 .mb-0 {
     margin-bottom: 0;
 }
+
+.menu-list {
+    padding-left: 20px;
+
+    list-style: none;
+}

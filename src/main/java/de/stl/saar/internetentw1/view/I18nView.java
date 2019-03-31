@@ -33,7 +33,7 @@ public class I18nView implements Serializable {
     }
 
     /**
-     * Ändert die Sprache der JSF View bei Änderung im XHTML.
+     * Ändert die Sprache der JSF-View bei Änderung im XHTML.
      *
      * @param event Das Event, dass beim Ändern der Sprache ausgelöst wird
      */

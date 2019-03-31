@@ -10,6 +10,14 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ * Validator, der folgende Kriterien für ein {@link Room} Objekt prüft:
+ * <ol>
+ * <li>Gebäude-Nummer zwischen 1 und 8</li>
+ * <li>Etagen-Nummer zwischen 0 und 2</li>
+ * <li>Raum-Nummer zwischen 1 und 20</li>
+ * </ol>
+ */
 @FacesValidator
 public class RoomValidator implements Validator<Room> {
 
