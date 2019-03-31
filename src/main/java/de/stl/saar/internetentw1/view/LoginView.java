@@ -3,7 +3,8 @@ package de.stl.saar.internetentw1.view;
 import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.FacesMessageUtils;
+import de.stl.saar.internetentw1.util.ResourceBundleUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,14 +51,14 @@ public class LoginView implements Serializable {
             return "menu?faces-redirect=true";
         }
 
-        FacesContextUtils.addGlobalErrorMessage(FacesContextUtils.getMessage("authenticationError"));
+        FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("authenticationError"));
 
         return "";
     }
 
     public String checkIfLoggedIn() {
         if (user == null) {
-            FacesContextUtils.addGlobalErrorMessage(FacesContextUtils.getMessage("sessionError"));
+            FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("sessionError"));
             return "index";
         }
 
@@ -66,7 +67,7 @@ public class LoginView implements Serializable {
 
     public String checkIfAdmin() {
         if (user.getRole() != Role.ADMIN) {
-            FacesContextUtils.addGlobalInfoMessage(FacesContextUtils.getMessage("adminError"));
+            FacesMessageUtils.addGlobalInfoMessage(ResourceBundleUtils.getMessage("adminError"));
             return "menu";
         }
 

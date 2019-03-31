@@ -1,6 +1,6 @@
 package de.stl.saar.internetentw1.view;
 
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.LocaleUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +26,7 @@ public class I18nView implements Serializable {
 
     @PostConstruct
     public void init() {
-        activeLocale = FacesContextUtils.getDefaultLocale().getLanguage();
+        activeLocale = LocaleUtils.getDefaultLocale().getLanguage();
         availableLocales = new LinkedHashMap<>();
         availableLocales.put("Deutsch", Locale.GERMAN);
         availableLocales.put("English", Locale.ENGLISH);
@@ -41,7 +41,7 @@ public class I18nView implements Serializable {
         Locale newLocale = new Locale(event.getNewValue().toString());
 
         if (availableLocales.containsValue(newLocale)) {
-            FacesContextUtils.setLocale(newLocale);
+            LocaleUtils.setLocale(newLocale);
         }
     }
 }

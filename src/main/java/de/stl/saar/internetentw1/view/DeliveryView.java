@@ -2,7 +2,8 @@ package de.stl.saar.internetentw1.view;
 
 import de.stl.saar.internetentw1.model.Dish;
 import de.stl.saar.internetentw1.model.Room;
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.FacesMessageUtils;
+import de.stl.saar.internetentw1.util.FlashUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,12 +33,12 @@ public class DeliveryView implements Serializable {
     @PostConstruct
     public void init() {
         isDisabled = false;
-        orderedDishes = FacesContextUtils.getFlashObjects("orderedDishes", Dish.class);
+        orderedDishes = FlashUtils.getList("orderedDishes", Dish.class);
     }
 
     public void order() {
         isDisabled = true;
-        FacesContextUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu Raum " + room);
+        FacesMessageUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu Raum " + room);
     }
 
     public String checkIfHasOrdered() {
