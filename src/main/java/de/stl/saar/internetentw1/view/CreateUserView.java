@@ -39,7 +39,14 @@ public class CreateUserView implements Serializable {
     private Role role;
 
     @Getter
-    private boolean isOwnProfile;
+    @Setter
+    private boolean hasToResetPassword;
+
+    @Getter
+    private boolean isAdmin;
+
+    @Getter
+    private boolean isHimself;
 
     private final UserRepository userRepository;
 
@@ -61,13 +68,15 @@ public class CreateUserView implements Serializable {
     }
 
     /**
-     * Setzt beim Laden der Seite ein Attribut zur Bestimmung, ob ein Benutzer
-     * er selbst ist, um entsprechende Felder anzuzeigen bzw. zu verstecken.
+     * Setzt beim Laden der Seite Attribute zur Bestimmung, ob ein Benutzer ein
+     * Administrator ist und ob er er selbst ist, um entsprechende Felder anzuzeigen
+     * bzw. zu verstecken und wieder zur richtigen Seite zu leiten.
      *
      * @param user Der eingeloggte Benutzer aus LoginView
      */
     public void onload(User user) {
-        isOwnProfile = user.getId() == id;
+        isAdmin = user.getRole() == Role.ADMIN;
+        isHimself = user.getId() == id;
     }
 
     /**
@@ -85,6 +94,7 @@ public class CreateUserView implements Serializable {
      * a-z, A-Z und 0-9.
      */
     public void generateRandomPassword() {
+        hasToResetPassword = true;
         password = RandomStringUtils.randomAlphanumeric(10);
     }
 
@@ -98,13 +108,13 @@ public class CreateUserView implements Serializable {
      * ein Redirect ins Hauptmenü, falls man sein eigenes Profil bearbeitet hat
      */
     public String saveUser() {
-        User user = new User(username, password, email, role);
-        userRepository.save(user.withId(id));
+        User user = new User(id, username, password, email, role, hasToResetPassword);
+        userRepository.save(user);
 
-        if (isOwnProfile) {
-            return "menu?faces-redirect=true";
+        if (!isHimself) {
+            return "manage_users?faces-redirect=true";
         }
 
-        return "manage_users?faces-redirect=true";
+        return "menu?faces-redirect=true";
     }
 }
