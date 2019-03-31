@@ -14,9 +14,8 @@ import static javax.faces.application.FacesMessage.SEVERITY_INFO;
 @UtilityClass
 public final class FacesMessageUtils {
 
-    // TODO i18n
-    private static final String INFO_SEVERITY_SUMMARY = "Info";
-    private static final String ERROR_SEVERITY_SUMMARY = "Fehler";
+    private static final String INFO_SEVERITY_SUMMARY = ResourceBundleUtils.getMessage("infoSeveritySummary");
+    private static final String ERROR_SEVERITY_SUMMARY = ResourceBundleUtils.getMessage("errorSeveritySummary");
 
     /**
      * Fügt dem aktuellen JSF-Kontext eine globale Nachricht mit dem Level
