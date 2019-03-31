@@ -12,6 +12,7 @@ import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.List;
 
 @ManagedBean
@@ -53,6 +54,8 @@ public class DeliveryView implements Serializable {
      */
     public void order() {
         isDisabled = true;
-        FacesMessageUtils.addGlobalInfoMessage(ResourceBundleUtils.getMessage("orderInfo") + room);
+
+        String message = MessageFormat.format(ResourceBundleUtils.getMessage("orderInfo"), room);
+        FacesMessageUtils.addGlobalInfoMessage(message);
     }
 }
