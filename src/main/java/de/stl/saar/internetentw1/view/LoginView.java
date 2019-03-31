@@ -58,19 +58,11 @@ public class LoginView implements Serializable {
 
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             this.user = user.get();
+            FlashUtils.putObject("user", this.user);
             return "menu?faces-redirect=true";
         }
 
         FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("authenticationError"));
-
-        return "";
-    }
-
-    public String changeOwnProfile() {
-        if (user != null) {
-            FlashUtils.putObject("user", user);
-            return "create_user?faces-redirect=true";
-        }
 
         return "";
     }
