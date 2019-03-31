@@ -61,8 +61,8 @@
                                 <f:convertNumber type="currency" currencySymbol="€"/>
                             </h:outputText>
                         </h:panelGrid>
-                        <p:button value="#{labels.buttonOrder}" outcome="delivery"
-                                  rendered="#{not empty orderView.droppedDishes}"/>
+                        <p:commandButton value="#{labels.buttonOrder}" action="#{orderView.proceedToDelivery}"
+                                         rendered="#{not empty orderView.droppedDishes}"/>
                     </p:outputPanel>
                 </p:fieldset>
 

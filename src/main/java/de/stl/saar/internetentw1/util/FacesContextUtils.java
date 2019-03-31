@@ -5,9 +5,7 @@ import lombok.experimental.UtilityClass;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Werkzeugklasse mit Methoden zum Arbeiten mit {@link FacesContext}.
@@ -75,6 +73,25 @@ public final class FacesContextUtils {
         }
 
         return Optional.empty();
+    }
+
+    public static <T> List<T> getFlashObjects(String key, Class<T> clazz) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Flash flash = facesContext.getExternalContext().getFlash();
+        List<T> list = new ArrayList<>();
+
+        if (flash.containsKey(key)) {
+            Object o = flash.get(key);
+            if (o instanceof Collection<?>) {
+                Collection<?> c = (Collection<?>) o;
+                c.stream()
+                        .filter(clazz::isInstance)
+                        .map(clazz::cast)
+                        .forEach(list::add);
+            }
+        }
+
+        return list;
     }
 
     /**

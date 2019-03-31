@@ -2,6 +2,7 @@ package de.stl.saar.internetentw1.view;
 
 import de.stl.saar.internetentw1.model.Dish;
 import de.stl.saar.internetentw1.repository.DishRepository;
+import de.stl.saar.internetentw1.util.FacesContextUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.DragDropEvent;
@@ -55,5 +56,10 @@ public class OrderView implements Serializable {
         return droppedDishes.stream()
                 .mapToDouble(Dish::getPrice)
                 .sum();
+    }
+
+    public String proceedToDelivery() {
+        FacesContextUtils.putFlashObject("orderedDishes", droppedDishes);
+        return "delivery?faces-redirect=true";
     }
 }

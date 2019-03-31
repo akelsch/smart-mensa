@@ -9,6 +9,7 @@
         <ui:define name="metadata">
             <f:metadata>
                 <f:viewAction action="#{loginView.checkIfLoggedIn}"/>
+                <f:viewAction action="#{deliveryView.checkIfHasOrdered}"/>
             </f:metadata>
         </ui:define>
         <ui:define name="title">#{labels.labelDelivery}</ui:define>
