@@ -38,9 +38,9 @@
 
                     <p:message for="email"/>
 
-                    <p:outputLabel for="role" value="#{labels.labelUserRole}"/>
+                    <p:outputLabel for="role" value="#{labels.labelUserRole}" rendered="#{!createUserView.ownProfile}"/>
                     <p:selectOneListbox id="role" value="#{createUserView.role}" required="true"
-                                        requiredMessage="#{msg.roleRequired}">
+                                        requiredMessage="#{msg.roleRequired}" rendered="#{!createUserView.ownProfile}">
                         <f:selectItems value="#{createUserView.roles}" var="role"
                                        itemValue="#{role}" itemLabel="#{role.label}"/>
                     </p:selectOneListbox>
@@ -52,12 +52,12 @@
                     <p:message for="password"/>
 
                     <!-- FIXME Logik implementieren + Checkbox aktivieren, wenn Admin neues Passwort generiert -->
-                    <p:selectBooleanCheckbox itemLabel="#{labels.labelResetPassword}"/>
+                    <p:selectBooleanCheckbox itemLabel="#{labels.labelResetPassword}" rendered="#{!createUserView.ownProfile}"/>
                     <h:panelGroup/>
                     <h:panelGroup/>
 
                     <p:commandButton value="#{labels.buttonPassword}" action="#{createUserView.generateRandomPassword}"
-                                     process="@this" update="password"/>
+                                     process="@this" update="password" rendered="#{!createUserView.ownProfile}"/>
                     <h:panelGroup/>
                     <h:panelGroup/>
 
@@ -65,7 +65,8 @@
                 </h:panelGrid>
 
                 <p:commandButton value="#{labels.buttonSave}" action="#{createUserView.saveUser}" update="grid"/>
-                <p:button value="#{labels.buttonCancel}" outcome="manage_users"/>
+                <p:button value="#{labels.buttonCancel}" outcome="manage_users" rendered="#{!createUserView.ownProfile}"/>
+                <p:button value="#{labels.buttonCancel}" outcome="menu" rendered="#{createUserView.ownProfile}"/>
             </h:form>
         </ui:define>
     </ui:composition>

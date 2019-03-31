@@ -26,6 +26,7 @@ public class MenuView implements Serializable {
     public String changeOwnProfile() {
         if (user != null) {
             FlashUtils.putObject("user", user);
+            FlashUtils.putObject("isOwnProfile", true);
             return "create_user?faces-redirect=true";
         }
 
