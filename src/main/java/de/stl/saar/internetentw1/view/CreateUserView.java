@@ -118,7 +118,7 @@ public class CreateUserView implements Serializable {
      * ein Redirect ins Hauptmenü, falls man sein eigenes Profil bearbeitet hat
      */
     public String saveUser() {
-        boolean passwordChanged = !newPassword.equals(oldPassword);
+        boolean passwordChanged = oldPassword != null && !newPassword.equals(oldPassword);
         if (passwordChanged) {
             resetPassword = false;
         }
@@ -128,7 +128,7 @@ public class CreateUserView implements Serializable {
         userRepository.save(user);
 
         // Weiterleiten
-        if (passwordChanged) {
+        if (isHimself && passwordChanged) {
             FacesMessageUtils.keepMessagesAfterRedirect();
             FacesMessageUtils.addGlobalInfoMessage(ResourceBundleUtils.getMessage("passwordChangedInfo"));
             return "index?faces-redirect=true";
