@@ -10,6 +10,7 @@
         <ui:define name="metadata">
             <f:metadata>
                 <f:viewAction action="#{loginView.checkIfLoggedIn}"/>
+                <f:viewAction action="#{loginView.checkIfHasToChangePassword}"/>
             </f:metadata>
         </ui:define>
         <ui:define name="title">#{labels.labelMenu}</ui:define>

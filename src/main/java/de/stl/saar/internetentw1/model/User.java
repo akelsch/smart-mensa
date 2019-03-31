@@ -28,7 +28,7 @@ public class User {
     @Enumerated
     private Role role;
 
-    private boolean hasToResetPassword;
+    private boolean resetPassword;
 
     public User(String username, String password, String email, Role role) {
         this.username = username;

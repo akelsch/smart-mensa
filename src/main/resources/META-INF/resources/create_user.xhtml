@@ -16,6 +16,11 @@
         <ui:define name="title">#{labels.labelCreateUser}</ui:define>
         <ui:define name="main">
             <h1>#{labels.labelCreateUser}</h1>
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:messages globalOnly="true" showDetail="true" closable="true"/>
+            </h:panelGrid>
+
             <h:form>
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <c:if test="#{createUserView.id != 0}">
@@ -50,7 +55,7 @@
                                  requiredMessage="#{msg.passwordRequired}"/>
                     <p:message for="password"/>
 
-                    <p:selectBooleanCheckbox id="resetPassword" value="#{createUserView.hasToResetPassword}"
+                    <p:selectBooleanCheckbox id="resetPassword" value="#{createUserView.resetPassword}"
                                              itemLabel="#{labels.labelResetPassword}"
                                              rendered="#{createUserView.admin}"/>
                     <h:panelGroup rendered="#{createUserView.admin}"/>

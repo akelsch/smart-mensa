@@ -40,7 +40,7 @@ public class CreateUserView implements Serializable {
 
     @Getter
     @Setter
-    private boolean hasToResetPassword;
+    private boolean resetPassword;
 
     @Getter
     private boolean isAdmin;
@@ -94,7 +94,7 @@ public class CreateUserView implements Serializable {
      * a-z, A-Z und 0-9.
      */
     public void generateRandomPassword() {
-        hasToResetPassword = true;
+        resetPassword = true;
         password = RandomStringUtils.randomAlphanumeric(10);
     }
 
@@ -108,7 +108,7 @@ public class CreateUserView implements Serializable {
      * ein Redirect ins Hauptmenü, falls man sein eigenes Profil bearbeitet hat
      */
     public String saveUser() {
-        User user = new User(id, username, password, email, role, hasToResetPassword);
+        User user = new User(id, username, password, email, role, resetPassword);
         userRepository.save(user);
 
         if (!isHimself) {
