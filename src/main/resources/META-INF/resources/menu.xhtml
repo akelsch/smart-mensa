@@ -27,13 +27,13 @@
 
             <ul class="menu-list">
                 <c:if test="#{loginView.user.role == 'ADMIN'}">
-                    <li><h:link value="#{labels.labelManageDishes}" outcome="manage_dishes"/></li>
-                    <li><h:link value="#{labels.labelManageUsers}" outcome="manage_users"/></li>
+                    <li><p:link value="#{labels.labelManageDishes}" outcome="manage_dishes"/></li>
+                    <li><p:link value="#{labels.labelManageUsers}" outcome="manage_users"/></li>
                 </c:if>
                 <!-- TODO Eigenes Profil ändern implementieren-->
-                <li><h:link value="#{labels.labelChangeProfile}"/></li>
-                <li><h:link value="#{labels.labelOrder}" outcome="order"/></li>
-                <li><h:link value="#{labels.labelLogOut}" outcome="index"/></li>
+                <li><p:commandLink value="#{labels.labelChangeProfile}" action="#{loginView.changeOwnProfile}"/></li>
+                <li><p:link value="#{labels.labelOrder}" outcome="order"/></li>
+                <li><p:link value="#{labels.labelLogOut}" outcome="index"/></li>
             </ul>
         </ui:define>
     </ui:composition>

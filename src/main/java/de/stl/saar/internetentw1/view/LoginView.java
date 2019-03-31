@@ -4,6 +4,7 @@ import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
 import de.stl.saar.internetentw1.util.FacesMessageUtils;
+import de.stl.saar.internetentw1.util.FlashUtils;
 import de.stl.saar.internetentw1.util.ResourceBundleUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,6 +62,15 @@ public class LoginView implements Serializable {
         }
 
         FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("authenticationError"));
+
+        return "";
+    }
+
+    public String changeOwnProfile() {
+        if (user != null) {
+            FlashUtils.putObject("user", user);
+            return "create_user?faces-redirect=true";
+        }
 
         return "";
     }
