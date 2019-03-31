@@ -56,7 +56,7 @@
                             </p:column>
                         </p:dataTable>
                         <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty orderView.droppedDishes}">
-                            <h:outputLabel value="#{labels.labelTotal}"/>
+                            <p:outputLabel value="#{labels.labelTotal}"/>
                             <h:outputText value="#{orderView.total}">
                                 <f:convertNumber type="currency" currencySymbol="€"/>
                             </h:outputText>
