@@ -4,6 +4,7 @@ import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
 import de.stl.saar.internetentw1.util.FacesMessageUtils;
+import de.stl.saar.internetentw1.util.FlashUtils;
 import de.stl.saar.internetentw1.util.ResourceBundleUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -75,6 +76,23 @@ public class LoginView implements Serializable {
         if (user == null) {
             FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("sessionError"));
             return "index";
+        }
+
+        return "";
+    }
+
+    /**
+     * Überprüft, ob ein eingeloggter Benutzer sein Passwort ändern muss. Falls
+     * ja, wird er auf die Seite zum Ändern des Profils weitergeleitet und erhält
+     * dort eine Fehlermeldung.
+     *
+     * @return Eine Weiterleitung zu {@code create_user.xhtml} oder nichts
+     */
+    public String checkIfHasToChangePassword() {
+        if (user.isResetPassword()) {
+            FlashUtils.putObject("user", user);
+            FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("changePasswordError"));
+            return "create_user";
         }
 
         return "";

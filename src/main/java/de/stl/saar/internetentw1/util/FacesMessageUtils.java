@@ -14,9 +14,16 @@ import static javax.faces.application.FacesMessage.SEVERITY_INFO;
 @UtilityClass
 public final class FacesMessageUtils {
 
-    // TODO i18n
-    private static final String INFO_SEVERITY_SUMMARY = "Info";
-    private static final String ERROR_SEVERITY_SUMMARY = "Fehler";
+    private static final String INFO_SEVERITY_SUMMARY = ResourceBundleUtils.getMessage("infoSeveritySummary");
+    private static final String ERROR_SEVERITY_SUMMARY = ResourceBundleUtils.getMessage("errorSeveritySummary");
+
+    /**
+     * Erlaubt es einer FacesMessage einen Redirect zu überleben.
+     */
+    public static void keepMessagesAfterRedirect() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+    }
 
     /**
      * Fügt dem aktuellen JSF-Kontext eine globale Nachricht mit dem Level

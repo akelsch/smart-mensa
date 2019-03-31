@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Role {
 
-    // TODO i18n
     ADMIN("Administrator"),
     USER("Benutzer");
 

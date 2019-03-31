@@ -4,6 +4,7 @@ import de.stl.saar.internetentw1.model.Dish;
 import de.stl.saar.internetentw1.model.Room;
 import de.stl.saar.internetentw1.util.FacesMessageUtils;
 import de.stl.saar.internetentw1.util.FlashUtils;
+import de.stl.saar.internetentw1.util.ResourceBundleUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.List;
 
 @ManagedBean
@@ -52,7 +54,8 @@ public class DeliveryView implements Serializable {
      */
     public void order() {
         isDisabled = true;
-        // TODO i18n
-        FacesMessageUtils.addGlobalInfoMessage("Ihre Bestellung ist auf dem Weg zu Raum " + room);
+
+        String message = MessageFormat.format(ResourceBundleUtils.getMessage("orderInfo"), room);
+        FacesMessageUtils.addGlobalInfoMessage(message);
     }
 }

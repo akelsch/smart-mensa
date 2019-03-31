@@ -3,7 +3,6 @@ package de.stl.saar.internetentw1.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Wither;
 
 import javax.persistence.*;
 
@@ -18,7 +17,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Wither
     private Long id;
 
     private String username;
@@ -29,6 +27,8 @@ public class User {
 
     @Enumerated
     private Role role;
+
+    private boolean resetPassword;
 
     public User(String username, String password, String email, Role role) {
         this.username = username;
