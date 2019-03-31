@@ -28,7 +28,11 @@ public class CreateUserView implements Serializable {
 
     @Getter
     @Setter
-    private String password;
+    private String oldPassword;
+
+    @Getter
+    @Setter
+    private String newPassword;
 
     @Getter
     @Setter
@@ -61,7 +65,8 @@ public class CreateUserView implements Serializable {
         user.ifPresent(u -> {
             id = u.getId();
             username = u.getUsername();
-            password = u.getPassword();
+            oldPassword = u.getPassword();
+            newPassword = oldPassword;
             email = u.getEmail();
             role = u.getRole();
         });
@@ -95,7 +100,7 @@ public class CreateUserView implements Serializable {
      */
     public void generateRandomPassword() {
         resetPassword = true;
-        password = RandomStringUtils.randomAlphanumeric(10);
+        newPassword = RandomStringUtils.randomAlphanumeric(10);
     }
 
     /**
@@ -103,12 +108,19 @@ public class CreateUserView implements Serializable {
      * <p>
      * Existiert die ID des Benutzers bereits, erfolgt ein Update. Ansonsten
      * erhält der Benutzer eine neue ID.
+     * <p>
+     * Schaltet außerdem die "Passwort beim nächsten Login ändern" Funktion ab,
+     * sobald eine Änderung am Passwort Feld vorgenommen wurde.
      *
      * @return Ein Redirect zurück auf die tabellarische Übersicht der Benutzer oder
      * ein Redirect ins Hauptmenü, falls man sein eigenes Profil bearbeitet hat
      */
     public String saveUser() {
-        User user = new User(id, username, password, email, role, resetPassword);
+        if (!oldPassword.equals(newPassword)) {
+            resetPassword = false;
+        }
+
+        User user = new User(id, username, newPassword, email, role, resetPassword);
         userRepository.save(user);
 
         if (!isHimself) {
