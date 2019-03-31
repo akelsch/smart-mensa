@@ -18,6 +18,14 @@ public final class FacesMessageUtils {
     private static final String ERROR_SEVERITY_SUMMARY = ResourceBundleUtils.getMessage("errorSeveritySummary");
 
     /**
+     * Erlaubt einer FacesMessage einen Redirect zu überleben.
+     */
+    public static void keepMessageAfterRedirect() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+    }
+
+    /**
      * Fügt dem aktuellen JSF-Kontext eine globale Nachricht mit dem Level
      * "Info" hinzu.
      *

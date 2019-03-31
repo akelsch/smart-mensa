@@ -3,6 +3,7 @@ package de.stl.saar.internetentw1.view;
 import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
+import de.stl.saar.internetentw1.util.FacesMessageUtils;
 import de.stl.saar.internetentw1.util.FlashUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -116,12 +117,21 @@ public class CreateUserView implements Serializable {
      * ein Redirect ins Hauptmenü, falls man sein eigenes Profil bearbeitet hat
      */
     public String saveUser() {
-        if (!oldPassword.equals(newPassword)) {
+        boolean passwordChanged = !newPassword.equals(oldPassword);
+        if (passwordChanged) {
             resetPassword = false;
         }
 
+        // Speichern
         User user = new User(id, username, newPassword, email, role, resetPassword);
         userRepository.save(user);
+
+        // Weiterleiten
+        if (passwordChanged) {
+            FacesMessageUtils.keepMessageAfterRedirect();
+            FacesMessageUtils.addGlobalInfoMessage("Passwort erfolgreich geändert");
+            return "index?faces-redirect=true";
+        }
 
         if (!isHimself) {
             return "manage_users?faces-redirect=true";
