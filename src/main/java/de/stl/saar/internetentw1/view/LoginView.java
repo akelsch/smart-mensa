@@ -91,7 +91,7 @@ public class LoginView implements Serializable {
     public String checkIfHasToChangePassword() {
         if (user.isResetPassword()) {
             FlashUtils.putObject("user", user);
-            FacesMessageUtils.addGlobalErrorMessage("Passwort wechseln biddi!");
+            FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("changePasswordError"));
             return "create_user";
         }
 

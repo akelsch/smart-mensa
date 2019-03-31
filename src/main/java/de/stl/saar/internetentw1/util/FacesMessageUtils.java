@@ -18,9 +18,9 @@ public final class FacesMessageUtils {
     private static final String ERROR_SEVERITY_SUMMARY = ResourceBundleUtils.getMessage("errorSeveritySummary");
 
     /**
-     * Erlaubt einer FacesMessage einen Redirect zu überleben.
+     * Erlaubt es einer FacesMessage einen Redirect zu überleben.
      */
-    public static void keepMessageAfterRedirect() {
+    public static void keepMessagesAfterRedirect() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().getFlash().setKeepMessages(true);
     }

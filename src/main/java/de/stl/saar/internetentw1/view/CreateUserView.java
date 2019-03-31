@@ -5,6 +5,7 @@ import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
 import de.stl.saar.internetentw1.util.FacesMessageUtils;
 import de.stl.saar.internetentw1.util.FlashUtils;
+import de.stl.saar.internetentw1.util.ResourceBundleUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -128,8 +129,8 @@ public class CreateUserView implements Serializable {
 
         // Weiterleiten
         if (passwordChanged) {
-            FacesMessageUtils.keepMessageAfterRedirect();
-            FacesMessageUtils.addGlobalInfoMessage("Passwort erfolgreich geändert");
+            FacesMessageUtils.keepMessagesAfterRedirect();
+            FacesMessageUtils.addGlobalInfoMessage(ResourceBundleUtils.getMessage("passwordChangedInfo"));
             return "index?faces-redirect=true";
         }
 
