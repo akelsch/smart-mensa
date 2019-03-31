@@ -15,9 +15,9 @@
         <ui:define name="title">#{labels.labelManageUser}</ui:define>
         <ui:define name="main">
             <h1>#{labels.labelManageUser}</h1>
-            <h:form>
+            <h:form styleClass="ui-g">
                 <p:dataTable id="dataTable" var="user" value="#{manageUsersView.users}" selectionMode="single"
-                             selection="#{manageUsersView.selectedUser}" rowKey="#{user.id}" style="max-width: 800px;">
+                             selection="#{manageUsersView.selectedUser}" rowKey="#{user.id}" styleClass="ui-lg-6">
                     <p:column headerText="#{labels.labelNumber}">
                         <h:outputText value="#{user.id}"/>
                     </p:column>
@@ -36,10 +36,10 @@
                                          update="dataTable"/>
                     </f:facet>
                 </p:dataTable>
-                <br/>
-                <p:button value="#{labels.buttonNew}" outcome="create_user"/>
-                <p:button value="#{labels.buttonBack}" outcome="menu"/>
             </h:form>
+            <br/>
+            <p:button value="#{labels.buttonNew}" outcome="create_user"/>
+            <p:button value="#{labels.buttonBack}" outcome="menu"/>
         </ui:define>
     </ui:composition>
 </h:body>

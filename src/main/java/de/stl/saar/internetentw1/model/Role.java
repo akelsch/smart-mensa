@@ -4,13 +4,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Klasse, die einen Benutzer Rolle beschreibt.
+ * Klasse, die eine Benutzer Rolle beschreibt.
  *
  * @see User
  */
 @RequiredArgsConstructor
 public enum Role {
 
+    // TODO i18n
     ADMIN("Administrator"),
     USER("Benutzer");
 

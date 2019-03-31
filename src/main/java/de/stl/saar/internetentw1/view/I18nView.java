@@ -1,6 +1,6 @@
 package de.stl.saar.internetentw1.view;
 
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.LocaleUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +15,7 @@ import java.util.Map;
 
 @ManagedBean
 @SessionScoped
-public class I18nBean implements Serializable {
+public class I18nView implements Serializable {
 
     @Getter
     @Setter
@@ -26,14 +26,14 @@ public class I18nBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        activeLocale = FacesContextUtils.getDefaultLocale().getLanguage();
+        activeLocale = LocaleUtils.getDefaultLocale().getLanguage();
         availableLocales = new LinkedHashMap<>();
         availableLocales.put("Deutsch", Locale.GERMAN);
         availableLocales.put("English", Locale.ENGLISH);
     }
 
     /**
-     * Ändert die Sprache der JSF View bei Änderung im XHTML.
+     * Ändert die Sprache der JSF-View bei Änderung im XHTML.
      *
      * @param event Das Event, dass beim Ändern der Sprache ausgelöst wird
      */
@@ -41,7 +41,7 @@ public class I18nBean implements Serializable {
         Locale newLocale = new Locale(event.getNewValue().toString());
 
         if (availableLocales.containsValue(newLocale)) {
-            FacesContextUtils.setLocale(newLocale);
+            LocaleUtils.setLocale(newLocale);
         }
     }
 }

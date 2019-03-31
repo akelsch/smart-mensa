@@ -2,7 +2,7 @@ package de.stl.saar.internetentw1.view;
 
 import de.stl.saar.internetentw1.model.Dish;
 import de.stl.saar.internetentw1.repository.DishRepository;
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.FlashUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,7 +44,7 @@ public class ManageDishesView implements Serializable {
      */
     public String changeSelectedDish() {
         if (selectedDish != null) {
-            FacesContextUtils.putFlashObject("dish", selectedDish);
+            FlashUtils.putObject("dish", selectedDish);
             return "create_dish?faces-redirect=true";
         }
 

@@ -7,9 +7,9 @@
     <h:form>
         <h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel value="#{labels.labelChooseLanguage}"/>
-            <p:selectOneMenu value="#{i18nBean.activeLocale}" valueChangeListener="#{i18nBean.onLocaleChange}"
+            <p:selectOneMenu value="#{i18nView.activeLocale}" valueChangeListener="#{i18nView.onLocaleChange}"
                              onchange="submit()">
-                <f:selectItems value="#{i18nBean.availableLocales}"/>
+                <f:selectItems value="#{i18nView.availableLocales}"/>
             </p:selectOneMenu>
         </h:panelGrid>
     </h:form>

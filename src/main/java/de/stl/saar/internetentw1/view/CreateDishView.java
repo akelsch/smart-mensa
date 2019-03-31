@@ -3,7 +3,7 @@ package de.stl.saar.internetentw1.view;
 import de.stl.saar.internetentw1.model.Category;
 import de.stl.saar.internetentw1.model.Dish;
 import de.stl.saar.internetentw1.repository.DishRepository;
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.FlashUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,7 +42,7 @@ public class CreateDishView implements Serializable {
 
     @PostConstruct
     public void init() {
-        Optional<Dish> dish = FacesContextUtils.getFlashObject("dish", Dish.class);
+        Optional<Dish> dish = FlashUtils.getObject("dish", Dish.class);
         dish.ifPresent(d -> {
             id = d.getId();
             name = d.getName();

@@ -8,7 +8,7 @@
     <ui:composition template="template/template.xhtml">
         <ui:define name="metadata">
             <f:metadata>
-                <f:event listener="#{loginView.clearForm}" type="preRenderView"/>
+                <f:event listener="#{loginView.onload}" type="preRenderView"/>
             </f:metadata>
         </ui:define>
         <ui:define name="title">Startseite</ui:define>

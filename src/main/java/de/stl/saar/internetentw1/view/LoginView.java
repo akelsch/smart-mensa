@@ -3,13 +3,13 @@ package de.stl.saar.internetentw1.view;
 import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.FacesMessageUtils;
+import de.stl.saar.internetentw1.util.ResourceBundleUtils;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Optional;
@@ -36,12 +36,22 @@ public class LoginView implements Serializable {
         this.userRepository = userRepository;
     }
 
-    public void clearForm(ComponentSystemEvent event) {
+    /**
+     * Löscht beim Laden der Seite alle Login-Formular Felder und loggt den
+     * Benutzer wieder aus.
+     */
+    public void onload() {
         username = "";
         password = "";
         user = null;
     }
 
+    /**
+     * Loggt einen Benutzer ein, falls er in der Datenbank existiert und das
+     * Passwort mit dem im Formular eingegebenen Passwort übereinstimmt.
+     *
+     * @return Eine Weiterleitung ins Hauptmenü oder eine Fehlermeldung
+     */
     public String login() {
         Optional<User> user = userRepository.findByUsername(username);
 
@@ -50,23 +60,35 @@ public class LoginView implements Serializable {
             return "menu?faces-redirect=true";
         }
 
-        FacesContextUtils.addGlobalErrorMessage(FacesContextUtils.getMessage("authenticationError"));
+        FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("authenticationError"));
 
         return "";
     }
 
+    /**
+     * Überprüft, ob der Benutzer eingeloggt ist. Falls nicht, wird er auf die
+     * Startseite weitergeleitet und erhält dort eine Fehlermeldung.
+     *
+     * @return Eine Weiterleitung zu {@code index.xhtml} oder nichts
+     */
     public String checkIfLoggedIn() {
         if (user == null) {
-            FacesContextUtils.addGlobalErrorMessage(FacesContextUtils.getMessage("sessionError"));
+            FacesMessageUtils.addGlobalErrorMessage(ResourceBundleUtils.getMessage("sessionError"));
             return "index";
         }
 
         return "";
     }
 
+    /**
+     * Überprüft, ob ein eingeloggter Benutzer ein Administrator ist. Falls nicht,
+     * wird er ins Hauptmenü weitergeleitet und erhält dort eine Fehlermeldung.
+     *
+     * @return Eine Weiterleitung zu {@code menu.xhtml} oder nichts
+     */
     public String checkIfAdmin() {
         if (user.getRole() != Role.ADMIN) {
-            FacesContextUtils.addGlobalInfoMessage(FacesContextUtils.getMessage("adminError"));
+            FacesMessageUtils.addGlobalInfoMessage(ResourceBundleUtils.getMessage("adminError"));
             return "menu";
         }
 

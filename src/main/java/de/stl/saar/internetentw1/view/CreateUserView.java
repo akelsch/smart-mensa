@@ -3,7 +3,7 @@ package de.stl.saar.internetentw1.view;
 import de.stl.saar.internetentw1.model.Role;
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.FlashUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -47,7 +47,7 @@ public class CreateUserView implements Serializable {
 
     @PostConstruct
     public void init() {
-        Optional<User> user = FacesContextUtils.getFlashObject("user", User.class);
+        Optional<User> user = FlashUtils.getObject("user", User.class);
         user.ifPresent(u -> {
             id = u.getId();
             username = u.getUsername();

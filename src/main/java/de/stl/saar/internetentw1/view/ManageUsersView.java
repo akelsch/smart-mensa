@@ -2,7 +2,7 @@ package de.stl.saar.internetentw1.view;
 
 import de.stl.saar.internetentw1.model.User;
 import de.stl.saar.internetentw1.repository.UserRepository;
-import de.stl.saar.internetentw1.util.FacesContextUtils;
+import de.stl.saar.internetentw1.util.FlashUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,7 +44,7 @@ public class ManageUsersView implements Serializable {
      */
     public String changeSelectedUser() {
         if (selectedUser != null) {
-            FacesContextUtils.putFlashObject("user", selectedUser);
+            FlashUtils.putObject("user", selectedUser);
             return "create_user?faces-redirect=true";
         }
 
