@@ -44,7 +44,7 @@
                         <f:selectItems value="#{createUserView.roles}" var="role"
                                        itemValue="#{role}" itemLabel="#{role.label}"/>
                     </p:selectOneListbox>
-                    <p:message for="role"/>
+                    <p:message for="role" rendered="#{!createUserView.ownProfile}"/>
 
                     <p:outputLabel for="password" value="#{labels.labelPassword}"/>
                     <p:inputText id="password" value="#{createUserView.password}" required="true"
