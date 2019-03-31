@@ -58,8 +58,16 @@ public class CreateUserView implements Serializable {
             email = u.getEmail();
             role = u.getRole();
         });
+    }
 
-        isOwnProfile = FlashUtils.getObject("isOwnProfile", Boolean.class).orElse(false);
+    /**
+     * Setzt beim Laden der Seite ein Attribut zur Bestimmung, ob ein Benutzer
+     * er selbst ist, um entsprechende Felder anzuzeigen bzw. zu verstecken.
+     *
+     * @param user Der eingeloggte Benutzer aus LoginView
+     */
+    public void onload(User user) {
+        isOwnProfile = user.getId() == id;
     }
 
     /**
@@ -86,7 +94,8 @@ public class CreateUserView implements Serializable {
      * Existiert die ID des Benutzers bereits, erfolgt ein Update. Ansonsten
      * erhält der Benutzer eine neue ID.
      *
-     * @return Ein Redirect zurück auf die tabellarische Übersicht der Benutzer
+     * @return Ein Redirect zurück auf die tabellarische Übersicht der Benutzer oder
+     * ein Redirect ins Hauptmenü, falls man sein eigenes Profil bearbeitet hat
      */
     public String saveUser() {
         User user = new User(username, password, email, role);
@@ -95,6 +104,7 @@ public class CreateUserView implements Serializable {
         if (isOwnProfile) {
             return "menu?faces-redirect=true";
         }
+
         return "manage_users?faces-redirect=true";
     }
 }

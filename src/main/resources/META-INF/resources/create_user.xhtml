@@ -10,7 +10,7 @@
         <ui:define name="metadata">
             <f:metadata>
                 <f:viewAction action="#{loginView.checkIfLoggedIn}"/>
-                <f:viewAction action="#{loginView.checkIfAdmin}"/>
+                <f:event listener="#{createUserView.onload(loginView.user)}" type="preRenderView"/>
             </f:metadata>
         </ui:define>
         <ui:define name="title">#{labels.labelCreateUser}</ui:define>
